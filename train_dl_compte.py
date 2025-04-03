@@ -31,7 +31,7 @@ class TrainDLCompte(TrainDL):
         # --- Fonction d'optimisation ---
         self._optimizer : optim.SGD = optim.SGD(self._net.parameters(), lr=1e-2)
                 
-    def __normalisation(self, dataset : ComptageGraines, rotation : int = None) -> list:
+    def _normalisation(self, dataset : ComptageGraines, rotation : int = None) -> list:
         """Fonction de normalisation du dataset
 
         :param dataset: Dataset
@@ -72,9 +72,9 @@ class TrainDLCompte(TrainDL):
         # --- Normalisations ---
         datasets_norm : list = []
         for dataset in datasets:
-            datasets_norm += self.__normalisation(dataset)
+            datasets_norm += self._normalisation(dataset)
             for rotation in TrainDL._rotations:
-                datasets_norm += self.__normalisation(dataset, rotation)
+                datasets_norm += self._normalisation(dataset, rotation)
 
         self._train_dataload : DataLoader = DataLoader(datasets_norm, batch_size=1, shuffle=True)
         self._val_dataload : DataLoader = DataLoader(datasets_norm, batch_size=1, shuffle=False)
@@ -93,7 +93,7 @@ if __name__ == "__main__":
     repertoires : list[tuple[str,int]] = [
         ("moyennes\\noirs",    74),
         ]
-    nb_epochs : int = 1000
+    nb_epochs : int = 50
     model_name : str = "test"
 
     # - run -

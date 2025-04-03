@@ -31,7 +31,7 @@ class TrainDLBinaire(TrainDL):
         # --- Fonction d'optimisation ---
         self._optimizer : optim.SGD = optim.SGD(self._net.parameters(), lr=1e-2)
                 
-    def __normalisation(self, dataset : ComptageGraines, label : int, rotation : int = None) -> list:
+    def _normalisation(self, dataset : ComptageGraines, label : int, rotation : int = None) -> list:
         """Fonction de normalisation du dataset
 
         :param dataset: Dataste à normaliser
@@ -79,10 +79,10 @@ class TrainDLBinaire(TrainDL):
         # --- Normalisations ---
         datasets_norm : list = []
         for dataset in range(len(datasets)):
-            datasets_norm += self.__normalisation(datasets[dataset],
+            datasets_norm += self._normalisation(datasets[dataset],
                                                   liste_labels_unique.index(liste_labels[dataset]))
             for rotation in TrainDL._rotations:
-                datasets_norm += self.__normalisation(datasets[dataset],
+                datasets_norm += self._normalisation(datasets[dataset],
                                                       liste_labels_unique.index(liste_labels[dataset]),
                                                       rotation)
 

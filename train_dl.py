@@ -19,7 +19,7 @@ import cv2 as cv
 import matplotlib.pyplot as plt
 
 # -- Classe abtraite --
-from abc import abstractmethod
+from abc import abstractmethod, ABC
 
 # --- Bibliothèques externes ---
 try:
@@ -30,7 +30,7 @@ except:
     from .dl_compte import Compte
 
 # ----- CLASSE -----
-class TrainDL:
+class TrainDL(ABC):
     # --- Attributs de classes ---
     __loss_fn : nn.CrossEntropyLoss = nn.CrossEntropyLoss()
     _rotations : list[int] = [cv.ROTATE_90_CLOCKWISE, cv.ROTATE_180, cv.ROTATE_90_COUNTERCLOCKWISE]
