@@ -1,0 +1,15 @@
+[client]
+host = 172.16.4.63
+port = 3306
+user = root
+password = hyrome
+database = grainotheque
+
+[IMPRIMANTE]
+channel = 1
+adresse_mac = 04:7F:0E:5B:70:1C
+
+
+[QRCODE]
+chemin_image = ./utils/temp
+url = https://www.aujardin.info/plantes/
