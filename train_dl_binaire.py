@@ -101,10 +101,13 @@ if __name__ == "__main__":
     # -- Lancement --
     # - Paramètres -
     repertoires : list[tuple[str,int,str]] = [
-        ("blanches",    74,     "blanches"),
-        ("blanches2",   74,     "blanches"),
-        ("noirs",       74,     "noirs"),
-        ("noirs2",      74,     "noirs")
+        ("grosses\\blanches",    74,     "blanches"),
+        ("grosses\\blanches2",   74,     "blanches"),
+        ("grosses\\noirs",       74,     "noirs"),
+        ("grosses\\noirs2",      74,     "noirs"),
+        ("moyennes\\blanches",   74,     "blanches"),
+        ('moyennes\\noirs',      74,     "noirs"),
+        ("petites\\noirs",       74,     "noirs")
         ]
     nb_epochs : int = 50
     model_name : str = "binaire_noire_blanche"

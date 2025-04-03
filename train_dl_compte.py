@@ -91,15 +91,14 @@ if __name__ == "__main__":
     # -- Lancement --
     # - Paramètres -
     repertoires : list[tuple[str,int]] = [
-        ("noirs",    74),
-        ("noirs2",    74),
+        ("moyennes\\noirs",    74),
         ]
-    nb_epochs : int = 50
+    nb_epochs : int = 1000
     model_name : str = "test"
 
     # - run -
     rn_train.run(repertoires, nb_epochs, model_name)
 
     # -- Test --
-    chemin : str = ".\\temp\\test_noirs.jpeg"
+    chemin : str = ".\\temp\\test_moyennes_noirs.jpeg"
     print(rn_train.evaluate(chemin))

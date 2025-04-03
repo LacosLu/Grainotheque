@@ -5,11 +5,11 @@ import cv2 as cv
 # ----- PROGRAMME -----
 class ComptageGraines(Dataset):
     # --- Méthodes ---
-    def __init__(self, couleur : str, nb_photos : int = 74) -> None:
+    def __init__(self, taille_couleur : str, nb_photos : int = 74) -> None:
         """Dataset regroupant les images du compte des graines jusqu'à 144
         """
         super().__init__()
-        self.__root_dir : str = f"data\\{couleur}"
+        self.__root_dir : str = f"data\\{taille_couleur}"
         self.__nb_photos : int = nb_photos
 
         # --- Itérateur ---
