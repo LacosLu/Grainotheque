@@ -25,9 +25,11 @@ from abc import abstractmethod, ABC
 try:
     from dl_binaire import Binaire
     from dl_compte import Compte
+    from dl_ternaire import Ternaire
 except:
     from .dl_binaire import Binaire
     from .dl_compte import Compte
+    from .dl_ternaire import Ternaire
 
 # ----- CLASSE -----
 class TrainDL(ABC):
@@ -40,7 +42,7 @@ class TrainDL(ABC):
         """Classe d'entrainement de réseaux de neurones
         """
         # --- Model ---
-        self._net : Compte | Binaire
+        self._net : Compte | Binaire | Ternaire
 
         # --- Fonction d'optimisation ---
         self._optimizer : optim.SGD 
