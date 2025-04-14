@@ -106,6 +106,14 @@ class ControleurGrainotheque:
     def __scan(self) -> None:
         """Scan du QR code mis sous la caméra"""
         # --- Récupération des données du QR code dans le modèle et dans la base de données ---
+        # -- Prise de photo --
+        try:
+            Camera.photographier("qr")
+        except:
+            print("Pas de caméra")
+
+        # -- Récupération des informations du QR code --
+        print(self.__app_qr._qr.lecture_qrcode())
 
         # --- Mise des informations dans un dictionnaire ---
         self.__informations : dict[str, str|int] = {
@@ -133,4 +141,5 @@ class ControleurGrainotheque:
 
     def __validation_retrait(self) -> None:
         """Validation du retrait"""
+        self.__app_qr._retrait.mise_à_jour_bdd()
         self.__retrait.fermer()

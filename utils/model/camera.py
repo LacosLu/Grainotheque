@@ -13,11 +13,11 @@ except:
 # ----- CLASSE -----
 class Camera:
     @staticmethod
-    def photographier():
+    def photographier(nom_img : str = "img"):
         """Prend une photo à l'aide de la caméra"""
         leds = Led()
         leds.toggle()
-        subprocess.run(['libcamera-jpeg', '-o', './utils/temp/img.jpg'])
+        subprocess.run(['libcamera-jpeg', '-o', f'./utils/temp/{nom_img}.jpg'])
         leds.toggle()
         system("clear")
 

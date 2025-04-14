@@ -1,9 +1,6 @@
-try:
-    import qrcode # Importe le paquet qrcode installer qui permet de créé un QR code 
-    from pyzbar.pyzbar import decode # Importe le paquet pyzbar installé pour la lecture de QR code
-    from PIL import ImageFont, ImageDraw, Image # Importe le paquet PIL qui permet l'ouverture, la manipulation et l'enregistrement de fichier
-except:
-    pass
+import qrcode # Importe le paquet qrcode installer qui permet de créé un QR code 
+from PIL import ImageFont, ImageDraw, Image # Importe le paquet PIL qui permet l'ouverture, la manipulation et l'enregistrement de fichier
+from pyzbar.pyzbar import decode # Importe le paquet pyzbar installé pour la lecture de QR code
 
 # création de la classe Qrcode qui permet de créé et de sauvegarder celui-ci
 class Qrcode:
