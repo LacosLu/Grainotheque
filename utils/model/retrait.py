@@ -6,23 +6,28 @@ from pymysql.cursors import DictCursor
 class RetraitBDD :
     # initialise les informations appeller dans les fonction de cette classe
     def __init__(self,config):
-        self.__connexion : Connection = connect(read_default_file="./utils/config/bdd.cnf") # element de connection à la BDD
-
+        try:
+            self.__connexion : Connection = connect(read_default_file="./utils/config/bdd.cnf") # element de connection à la BDD
+        except:
+            print("Connexion non réussie")
 
     # mettre à jour la BDD
     def mise_à_jour_bdd(self,variete):
         # requete permetant de retiré un sachet au stock
-        requete ="""
-            UPDATE graine 
-            SET quantite_sachet = quantite_sachet - 1 
-            WHERE id_variete = (
-                SELECT id_variete FROM variete WHERE nom_variete = %s
-            )
-            """
-        curseur: DictCursor= self.__connexion.cursor(DictCursor)
-        curseur.execute(requete, (variete,))
-        curseur.fetchall()
-        self.__connexion.commit() # met à jour la base
+        try:
+            requete ="""
+                UPDATE graine 
+                SET quantite_sachet = quantite_sachet - 1 
+                WHERE id_variete = (
+                    SELECT id_variete FROM variete WHERE nom_variete = %s
+                )
+                """
+            curseur: DictCursor= self.__connexion.cursor(DictCursor)
+            curseur.execute(requete, (variete,))
+            curseur.fetchall()
+            self.__connexion.commit() # met à jour la base
+        except:
+            print("Pas de connexion")
 
         # # recalcule le stock
         # requete ="""
