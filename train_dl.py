@@ -90,6 +90,13 @@ class TrainDL(ABC):
                                                              loss_train / len(self._train_dataload)))
                 
     def _calcul_normalisation(self, datasets : list) -> None:
+        """Calcul de la moyenne et de l'écart-type des données afin de 
+        générer les fonctions de normalisation et de dénormalisation
+
+        :param datasets: Liste des datasets de données
+        :type datasets: list
+        """
+        # - Création de la liste d'images -
         imgs : list = []
 
         for dataset in datasets:
