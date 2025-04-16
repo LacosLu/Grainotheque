@@ -6,6 +6,7 @@ from dl_binaire import Binaire
 import unittest
 import torch
 
+# ----- CLASSE -----
 class Test_TestDLBinaire(unittest.TestCase):
     
     def test_retour(self):
