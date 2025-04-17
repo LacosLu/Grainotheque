@@ -13,7 +13,7 @@ except:
 # ----- CLASSE -----
 class Camera:
     @staticmethod
-    def photographier(nom_img : str = "img"):
+    def photographier(nom_img : str = "img") -> None:
         """Prend une photo à l'aide de la caméra"""
         leds = Led()
         leds.toggle()
