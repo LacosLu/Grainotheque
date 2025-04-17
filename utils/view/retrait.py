@@ -14,9 +14,9 @@ class Retrait(Base):
         """Page de l'application de la station où la graine est existante dans la base de données"""
         super().__init__()
 
-        self.__initialiser_champs(informations)
+        self._initialiser_champs(informations)
 
-    def __initialiser_champs(self, infos : dict[str, str|int]) -> None:
+    def _initialiser_champs(self, infos : dict[str, str|int]) -> None:
         # Famille
         famille : ctk.CTkLabel = ctk.CTkLabel(self._canva,
                                               text=infos["famille"],

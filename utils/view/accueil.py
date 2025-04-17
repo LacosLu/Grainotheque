@@ -14,9 +14,9 @@ class Accueil(Base):
         """Accueil de l'application de la station d'identification"""
         super().__init__()
 
-        self.__initialiser_champs()
+        self._initialiser_champs()
 
-    def __initialiser_champs(self) -> None:
+    def _initialiser_champs(self) -> None:
         """Initialise les champs de la page"""
         # Entrée pour la famille
         famille = ctk.CTkEntry(self._canva,
