@@ -23,11 +23,11 @@ class Clavier:
         self.__root : ctk.CTk = ctk.CTk()
         self.__root.title("Clavier")
 
-        self.__entry = entree
+        self.__entry : ctk.CTkEntry = entree
 
         self.__placement_bouttons()
 
-    def __placement_bouttons(self):
+    def __placement_bouttons(self) -> None:
         for row, keys in enumerate(Clavier.__buttons):
             for col, key in enumerate(keys):
                 if key == 'Space':
