@@ -13,7 +13,7 @@ class BDDGrainotheque:
             print("Connexion non réussie")
         self.__nom_grainotheque : str = nom_grainotheque
 
-    def recherche_graine(self, informations : dict[str,str|int]) -> bool:
+    def recherche_graine(self, informations : dict[str,str|int]) -> bool|None:
         """Fonction de recherche de la graine dans la base de données"""
         try:
             requete : str = """
@@ -48,7 +48,7 @@ class BDDGrainotheque:
         except:
             print("Pas de connexion")
         
-    def recuperer_quantite_par_sachet(self, informations : dict[str,str|int]) -> int:
+    def recuperer_quantite_par_sachet(self, informations : dict[str,str|int]) -> int|None:
         """Récupère la quantité de graines par sachet d'une graine dans la base de données"""
         try:
             requete : str ="""
@@ -80,7 +80,7 @@ class BDDGrainotheque:
         except:
             print("Pas de connexion")
     
-    def rechercher_famille(self, informations : dict[str, str|int]) -> None:
+    def rechercher_famille(self, informations : dict[str, str|int]) -> bool|None:
         """Recherche une famille dans la BDD"""
         try:
             requete = """
@@ -122,7 +122,7 @@ class BDDGrainotheque:
         except:
             print("Pas de connexion")
 
-    def rechercher_espece(self, informations : dict[str, str|int]) -> None:
+    def rechercher_espece(self, informations : dict[str, str|int]) -> bool | None:
         """Recherche une esoèce dans la BDD"""
         try:
             requete = """
@@ -174,7 +174,7 @@ class BDDGrainotheque:
         except:
             print("Pas de connexion")
 
-    def rechercher_variete(self, informations : dict[str, str|int]) -> None:
+    def rechercher_variete(self, informations : dict[str, str|int]) -> bool | None:
         """Recherche d'une variété dans la BDD"""
         try:
             requete = """
