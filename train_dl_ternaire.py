@@ -21,12 +21,18 @@ except:
 # ----- CLASSE -----
 class TrainDLTernaire(TrainDL):
     # --- Méthodes
-    def __init__(self):
+    def __init__(self, net : str = ""):
         """Classe d'entrainement de réseaux de neurones
+
+        :param net: nom du model pré-entrainé, defaults to ""
+        :type net: str, optional
         """
         super().__init__()
         # --- Model ---
         self._net : Ternaire = Ternaire()
+
+        if net != "":
+            self._net.load_state_dict(torch.load(f".\\models\\{net}", weights_only=False))
 
         # --- Fonction d'optimisation ---
         self._optimizer : optim.SGD = optim.SGD(self._net.parameters(), lr=1e-2)

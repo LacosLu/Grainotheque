@@ -21,12 +21,18 @@ except:
 # ----- CLASSE -----
 class TrainDLCompte(TrainDL):
     # --- Méthodes
-    def __init__(self):
+    def __init__(self, net : str =""):
         """Classe d'entrainement de réseaux de neurones
+
+        :param net: nom du model pré-entrainé, defaults to ""
+        :type net: str, optional
         """
         super().__init__()
         # --- Model ---
         self._net : Compte = Compte()
+
+        if net != "":
+            self._net.load_state_dict(torch.load(f".\\models\\{net}", weights_only=False))
 
         # --- Fonction d'optimisation ---
         self._optimizer : optim.SGD = optim.SGD(self._net.parameters(), lr=1e-2)
@@ -86,19 +92,20 @@ class TrainDLCompte(TrainDL):
 # ----- PROGRAMME -----
 if __name__ == "__main__":
     # -- Initialisation des éléments --
-    rn_train = TrainDLCompte()
+    rn_train = TrainDLCompte("compte_blanche_grosse.pt")
 
     # -- Lancement --
     # - Paramètres -
     repertoires : list[tuple[str,int]] = [
-        ("moyennes\\noirs",    74),
+        ("grosses\\blanches",    74),
+        ("grosses\\blanches2",  74)
         ]
-    nb_epochs : int = 50
-    model_name : str = "test"
+    nb_epochs : int = 500
+    model_name : str = "compte_blanche_grosse"
 
     # - run -
     rn_train.run(repertoires, nb_epochs, model_name)
 
     # -- Test --
-    chemin : str = ".\\temp\\test_moyennes_noirs.jpeg"
+    chemin : str = ".\\temp\\test_blanches.jpeg"
     print(rn_train.evaluate(chemin))

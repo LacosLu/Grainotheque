@@ -21,12 +21,18 @@ except:
 # ----- CLASSE -----
 class TrainDLBinaire(TrainDL):
     # --- Méthodes
-    def __init__(self):
+    def __init__(self, net : str = ""):
         """Classe d'entrainement de réseaux de neurones
+
+        :param net: nom du model pré-entrainé, defaults to ""
+        :type net: str, optional
         """
         super().__init__()
         # --- Model ---
         self._net : Binaire = Binaire()
+
+        if net != "":
+            self._net.load_state_dict(torch.load(f".\\models\\{net}", weights_only=False))
 
         # --- Fonction d'optimisation ---
         self._optimizer : optim.SGD = optim.SGD(self._net.parameters(), lr=1e-2)
@@ -96,7 +102,7 @@ class TrainDLBinaire(TrainDL):
 # ----- PROGRAMME -----
 if __name__ == "__main__":
     # -- Initialisation des éléments --
-    rn_train = TrainDLBinaire()
+    rn_train = TrainDLBinaire("binaire_noire_blanche.pt")
 
     # -- Lancement --
     # - Paramètres -
@@ -107,7 +113,7 @@ if __name__ == "__main__":
         ("grosses\\noirs2",      74,     "noirs"),
         ("moyennes\\blanches",   74,     "blanches"),
         ('moyennes\\noirs',      74,     "noirs"),
-        ("petites\\noirs",       74,     "noirs")
+        ("petites\\noirs",       36,     "noirs")
         ]
     nb_epochs : int = 50
     model_name : str = "binaire_noire_blanche"
