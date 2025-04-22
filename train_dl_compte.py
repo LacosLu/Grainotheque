@@ -100,7 +100,7 @@ if __name__ == "__main__":
         ("grosses\\blanches",    74),
         ("grosses\\blanches2",  74)
         ]
-    nb_epochs : int = 500
+    nb_epochs : int = 2_000
     model_name : str = "compte_blanche_grosse"
 
     # - run -
