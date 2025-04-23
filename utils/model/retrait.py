@@ -13,20 +13,25 @@ class RetraitBDD :
 
     # mettre à jour la BDD
     def mise_à_jour_bdd(self,dictionnaire):
+        # récupere la variété dans le dictionnaire 
         variete = dictionnaire.get('variete')
-        # requete permetant de retiré un sachet au stock
-        try:
-            requete ="""
+
+        # requete pour retire un sachet du stock de la variété dans la BDD
+        requete ="""
                 UPDATE graine 
                 SET quantite_sachet = quantite_sachet - 1 
                 WHERE id_variete = (
                     SELECT id_variete FROM variete WHERE nom_variete = %s
                 )
                 """
+        param = (variete,)
+
+        try:
+            # se connecte à la BDD et déclanche la requete 
             curseur: DictCursor= self.__connexion.cursor(DictCursor)
-            curseur.execute(requete, (variete,))
-            curseur.fetchall()
+            curseur.execute(requete,param)
             self.__connexion.commit() # met à jour la base
             self.__connexion.close()
         except:
-            print("Pas de connexion")
+            # en cas déchèque à la connexion 
+            raise("Pas de connexion")

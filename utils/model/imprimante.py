@@ -1,5 +1,8 @@
-from .phomemo_printer_master.phomemo_printer.ESCPOS_printer import Printer # Importe la classe printer qui se trouve dans le dossier phomemo_printer_master/phomemo_printer dans le documment ESCPOS_printer.py
-
+# Importe la classe printer qui se trouve dans le dossier phomemo_printer_master/phomemo_printer dans le documment ESCPOS_printer.py
+try:
+    from phomemo_printer_master.phomemo_printer.ESCPOS_printer import Printer 
+except:
+    from .phomemo_printer_master.phomemo_printer.ESCPOS_printer import Printer 
 
 # création de la classe Imprimante qui permet de se connecter à l'imprimante et de lancer une impression
 class Imprimante:

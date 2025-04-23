@@ -72,5 +72,6 @@ class Qrcode:
                 value = origine.split(":")[1]
                 dictionnaire[destination] = value
             return dictionnaire
-        except ValueError:
-            return print("QR code illisible !")
+        except:
+            # en cas de QR code illisible
+            raise("QR code illisible !")

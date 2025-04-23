@@ -2,11 +2,11 @@ from configparser import ConfigParser # Importation d'un packet permettent de li
 import os # Importation d'un packet permettent de modifier des document (dans le cas présent, suprimer une image)
 
 try:
-    from qrcode import Qrcode
+    from lire_cree_qrcode import Qrcode
     from retrait import RetraitBDD
     from imprimante import Imprimante
 except:
-    from .qrcode import Qrcode
+    from .lire_cree_qrcode import Qrcode
     from .retrait import RetraitBDD
     from .imprimante import Imprimante
 
