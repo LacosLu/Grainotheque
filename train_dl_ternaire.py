@@ -112,8 +112,13 @@ if __name__ == "__main__":
         ("grosses\\noirs",       74,     "grosses"),
         ("grosses\\noirs2",      74,     "grosses"),
         ("moyennes\\blanches",   74,     "moyennes"),
+        ("moyennes\\blanches2",  74,     "moyennes"),
         ('moyennes\\noirs',      74,     "moyennes"),
-        ("petites\\noirs",       36,     "petites")
+        ("moyennes\\noirs2",     74,     "moyennes"),
+        ("petites\\blanches",    74,     "petites"),
+        ("petites\\blanches2",   74,     "petites"),
+        ("petites\\noirs",       36,     "petites"),
+        ("petites\\noirs2",      36,     "petites")
         ]
     nb_epochs : int = 50
     model_name : str = "ternaire"
@@ -122,5 +127,5 @@ if __name__ == "__main__":
     rn_train.run(repertoires, nb_epochs, model_name)
 
     # -- Test --
-    chemin : str = ".\\temp\\test_petite.jpeg"
+    chemin : str = ".\\temp\\test_moyennes_blanches.jpeg"
     print(rn_train.evaluate(chemin))
