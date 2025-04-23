@@ -107,10 +107,10 @@ class ControleurGrainotheque:
         """Scan du QR code mis sous la caméra"""
         # --- Récupération des données du QR code dans le modèle et dans la base de données ---
         # -- Prise de photo --
-        try:
+        """try:
             Camera.photographier("qr")
         except:
-            print("Pas de caméra")
+            print("Pas de caméra")"""
 
         # -- Récupération des informations du QR code --
         print(self.__app_qr._qr.lecture_qrcode())

@@ -2,7 +2,7 @@ from configparser import ConfigParser # Importation d'un packet permettent de li
 import os # Importation d'un packet permettent de modifier des document (dans le cas présent, suprimer une image)
 
 try:
-    from qrcode import QRCode
+    from qrcode import Qrcode
     from retrait import RetraitBDD
     from imprimante import Imprimante
 except:
@@ -21,7 +21,7 @@ class ApplicationQR:
         # relie les partits de config aux partit du code concerner 
         self._qr = Qrcode(config = self.__config["QRCODE"])
         self._imprimante = Imprimante(config = self.__config["IMPRIMANTE"])
-        self._retrait = RetraitBDD(config = self.__config["QRCODE"])
+        self._retrait = RetraitBDD()
 
 
     # lance les fonctions en leurs donnent les données nécessaire
@@ -29,8 +29,8 @@ class ApplicationQR:
         image = self._qr.creation_qrcode(self.__donnee) # appelle la fonction creation_qrcode de la classe Qrcode
         self._imprimante.impretion_qrcode(image) # appelle la fonction impretion_qrcode de la classe Imprimante
         os.remove(image) # suprime l'image
-        veriete = self._qr.lecture_qrcode() # appelle la fonction lecture_qrcode de la classe Retrait
-        self._retrait.mise_à_jour_bdd(veriete) # appelle la fonction mise_à_jour_bdd de la classe Retrait
+        dictionnaire = self._qr.lecture_qrcode() # appelle la fonction lecture_qrcode de la classe Retrait
+        self._retrait.mise_à_jour_bdd(dictionnaire) # appelle la fonction mise_à_jour_bdd de la classe Retrait
     
 
 # lance les fonction du main

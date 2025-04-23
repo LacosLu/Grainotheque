@@ -59,16 +59,18 @@ class Qrcode:
 
         # lire le QR code pris en photo
     def lecture_qrcode(self):
-        self.__data = {} # dictionnaire qui récuperera les info du QR code
+        # dictionnaire qui récuperera les info du QR code
+        dictionnaire = {"famille": "" , "espece":"" , "variete":"" , "date_depot":"","quantite_sachets":"","url_aide":""}
         img = Image.open(f"{self.__chemin_png}/qr.jpg") # ouverture du QR code
         decoded = decode(img) # décode l'image
-        donnees = decoded[0].data.decode("utf-8") 
-        # recupere les données et les met dans le dictionnaire
-        for ligne in donnees.strip().split("\n"):
-            if ligne =='':
-                break
-            key, value = ligne.split(" : ")
-            self.__data[key.strip()] = value.strip()
-        # récupert la variété pour la mise à jour de la BDD
-        self.__variete = self.__data.get('variété')
-        return self.__variete
+        try:
+            donnees = decoded[0].data.decode("utf-8")
+            # recupere les données et les met dans le dictionnaire
+            for origine,destination in zip(donnees.strip().split("\n"),dictionnaire) :
+                if origine =='':
+                    break
+                value = origine.split(":")[1]
+                dictionnaire[destination] = value
+            return dictionnaire
+        except ValueError:
+            return print("QR code illisible !")
