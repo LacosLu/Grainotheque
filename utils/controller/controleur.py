@@ -132,5 +132,5 @@ class ControleurGrainotheque:
 
     def __validation_retrait(self) -> None:
         """Validation du retrait"""
-        self.__app_qr._retrait.mise_à_jour_bdd()
+        self.__app_qr._retrait.mise_à_jour_bdd(self.__informations)
         self.__retrait.fermer()
