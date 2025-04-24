@@ -102,7 +102,7 @@ class TrainDLBinaire(TrainDL):
 # ----- PROGRAMME -----
 if __name__ == "__main__":
     # -- Initialisation des éléments --
-    rn_train = TrainDLBinaire("binaire_noire_blanche.pt")
+    rn_train = TrainDLBinaire("binaire.pt")
 
     # -- Lancement --
     # - Paramètres -
@@ -112,15 +112,20 @@ if __name__ == "__main__":
         ("grosses\\noirs",       74,     "noirs"),
         ("grosses\\noirs2",      74,     "noirs"),
         ("moyennes\\blanches",   74,     "blanches"),
+        ("moyennes\\blanches2",  74,     "blanches"),
         ('moyennes\\noirs',      74,     "noirs"),
-        ("petites\\noirs",       36,     "noirs")
+        ("moyennes\\noirs2",     74,     "noirs"),
+        ("petites\\blanches",    74,     "blanches"),
+        ("petites\\blanches2",   74,     "blanches"),
+        ("petites\\noirs",       36,     "noirs"),
+        ("petites\\noirs2",      36,     "noirs")
         ]
-    nb_epochs : int = 50
-    model_name : str = "binaire_noire_blanche"
+    nb_epochs : int = 10
+    model_name : str = "binaire"
 
     # - run -
     rn_train.run(repertoires, nb_epochs, model_name)
 
     # -- Test --
-    chemin : str = ".\\temp\\test_blanches.jpeg"
+    chemin : str = ".\\temp\\test_moyennes_noirs.jpeg"
     print(rn_train.evaluate(chemin))

@@ -101,11 +101,11 @@ if __name__ == "__main__":
         ("grosses\\blanches2",  74)
         ]
     nb_epochs : int = 2_000
-    model_name : str = "compte_blanche_grosse"
+    model_name : str = "compte_grosses_blanches"
 
     # - run -
     rn_train.run(repertoires, nb_epochs, model_name)
 
     # -- Test --
-    chemin : str = ".\\temp\\test_blanches.jpeg"
+    chemin : str = ".\\temp\\test_grosses_blanches.jpeg"
     print(rn_train.evaluate(chemin))
