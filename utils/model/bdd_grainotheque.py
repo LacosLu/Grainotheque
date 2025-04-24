@@ -48,11 +48,11 @@ class BDDGrainotheque:
         except:
             print("Pas de connexion")
         
-    def recuperer_quantite_par_sachet(self, informations : dict[str,str|int]) -> int|None:
+    def recuperer_graine(self, informations : dict[str,str|int]) -> int|None:
         """Récupère la quantité de graines par sachet d'une graine dans la base de données"""
         try:
             requete : str ="""
-            SELECT quantite_graines_sachet
+            SELECT quantite_sachet
             FROM graine
             NATURAL JOIN famille
             NATURAL JOIN espece
@@ -73,10 +73,10 @@ class BDDGrainotheque:
 
             curseur : DictCursor = self.__connexion.cursor(DictCursor)
             curseur.execute(requete, parametres)
-            res : tuple[dict[str, Any]] = curseur.fetchall()
+            res : tuple[dict[str, Any]] = curseur.fetchone()
             curseur.close()
 
-            return res[0]["quantite_graines_sachet"]
+            return res
         except:
             print("Pas de connexion")
     

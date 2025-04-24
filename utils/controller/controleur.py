@@ -38,7 +38,7 @@ class ControleurGrainotheque:
 
         # --- Besoin de réaliser la requête dans le modèle ---
         if self.__bdd.recherche_graine(self.__informations) :
-            quantite_par_sachet : int = self.__bdd.recuperer_quantite_par_sachet(self.__informations)
+            quantite_par_sachet : int = self.__bdd.recuperer_graine(self.__informations)["quantite_graines_sachet"]
         else :
             quantite_par_sachet : str = "Nouvelle graine"
         
@@ -107,13 +107,19 @@ class ControleurGrainotheque:
         """Scan du QR code mis sous la caméra"""
         # --- Récupération des données du QR code dans le modèle et dans la base de données ---
         # -- Prise de photo --
-        """try:
+        try:
             Camera.photographier("qr")
         except:
-            print("Pas de caméra")"""
+            print("Pas de caméra")
 
         # -- Récupération des informations du QR code --
         self.__informations = self.__app_qr._qr.lecture_qrcode()
+        print(self.__informations)
+
+        # --- Requête pour récupérer les informations supplémentaires ---
+        info_graines : dict = self.__bdd.recuperer_graine(self.__informations)
+        self.__informations["quantite_sachets"] = info_graines["quantite_sachet"]
+        self.__informations["nb_graines"] = int(self.__informations["quantite_sachets"])*int(self.__informations["quantite_par_sachet"])
 
         # --- Génération de la page ---
         self.__retrait : Retrait = Retrait(self.__informations)

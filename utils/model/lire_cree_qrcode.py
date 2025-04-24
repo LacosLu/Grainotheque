@@ -29,7 +29,7 @@ class Qrcode:
 
 
         data =f'Famille : {donnee["famille"]}\nEspèce : {donnee["espece"]}\nVariété : {donnee["variete"]}\nRécolté le : {donnee["date_recolte"]}\nNombre de graine dans le sachet : {donnee["quantite_par_sachet"]}\n\nurl_aide : {self.__url}{self.__espece}' # informations dont le QR code à besoi et informations qu'il devra fournir
-        self.__qr.add_data(data.encode("utf-8")) # convertir la chaîne en octets avant de l’ajouter au QR code en l'encodant en latin-1
+        self.__qr.add_data(data.encode("latin-1")) # convertir la chaîne en octets avant de l’ajouter au QR code en l'encodant en latin-1
         self.__qr.make(fit = True) # ne modifie pas la taille en fonction du nombre de donnée
         image_origine = self.__qr.make_image( fill_color = "black", back_color = "white") # défini les couleur de l'image
         image_origine = image_origine.resize(self.__redim_image) # redimentionne l'image
@@ -60,7 +60,7 @@ class Qrcode:
         # lire le QR code pris en photo
     def lecture_qrcode(self):
         # dictionnaire qui récuperera les info du QR code
-        dictionnaire = {"famille": "" , "espece":"" , "variete":"" , "date_recolte":"","quantite_par_sachet":"","url_aide":""}
+        dictionnaire = {"famille":"","espece":"","variete":"","date_recolte":"","quantite_par_sachet":"","url_aide":""}
         img = Image.open(f"{self.__chemin_png}/qr.jpg") # ouverture du QR code
         decoded = decode(img) # décode l'image
         try:
@@ -70,7 +70,7 @@ class Qrcode:
                 if origine =='':
                     break
                 value = origine.split(":")[1]
-                dictionnaire[destination] = value
+                dictionnaire[destination] = value.strip()
             return dictionnaire
         except:
             # en cas de QR code illisible
