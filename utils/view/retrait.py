@@ -63,8 +63,12 @@ class Retrait(Base):
         date_recolte.grid(column=1, row=0, padx=5, pady=5)
 
         # Prénom du dépositaire
+        if "prenom_depositaire" in infos.keys():
+            text : str = infos["prenom_depositaire"]
+        else:
+            text : str = "Prénom du dépositaire non disponible"
         prenom_depositaire : ctk.CTkLabel = ctk.CTkLabel(self._canva,
-                                                         text=infos["prenom_depositaire"],
+                                                         text=text,
                                                          width=self._largeur_items,
                                                          height=self._hauteur_items,
                                                          font=self._font,
@@ -72,8 +76,12 @@ class Retrait(Base):
         prenom_depositaire.grid(column=1, row=1, padx=5, pady=5)
 
         # E-mail du dépositaire
+        if "email_depositaire" in infos.keys():
+            text : str = infos["email_depositaire"]
+        else:
+            text : str = "E-mail du dépositaire non disponible"
         email_depositaire : ctk.CTkLabel = ctk.CTkLabel(self._canva,
-                                                        text=infos["email_depositaire"],
+                                                        text=text,
                                                         width=self._largeur_items,
                                                         height=self._hauteur_items,
                                                         font=self._font,
@@ -81,8 +89,12 @@ class Retrait(Base):
         email_depositaire.grid(column=1, row=2, padx=5, pady=5)
         
         # Date du dépôt
+        if "date_depot" in infos.keys():
+            text : str = infos["date_depot"]
+        else:
+            text : str = "Date du dépot non disponible"
         date_depot : ctk.CTkLabel = ctk.CTkLabel(self._canva,
-                                                 text=infos["date_depot"],
+                                                 text=text,
                                                  width=self._largeur_items,
                                                  height=self._hauteur_items,
                                                  font=self._font,
@@ -90,8 +102,12 @@ class Retrait(Base):
         date_depot.grid(column=1, row=3, padx=5, pady=5)
 
         # Nombre de graines
+        if "nb_graines" in infos.keys():
+            text : str = infos["nb_graines"]
+        else:
+            text : str = "Nombre de graines non disponible"
         nb_graines : ctk.CTkLabel = ctk.CTkLabel(self._canva,
-                                                 text=infos["nb_graines"],
+                                                 text=text,
                                                  width=self._largeur_items,
                                                  height=self._hauteur_items,
                                                  font=self._font,
@@ -108,16 +124,24 @@ class Retrait(Base):
         self._bouttons["validation"] = validation
 
         # Champ des observations
+        if "observations" in infos.keys():
+            text : str = infos["observations"]
+        else:
+            text : str = "Observations non disponible"
         observations : ctk.CTkLabel = ctk.CTkLabel(self._canva,
-                                                   text=infos["observations"],
+                                                   text=text,
                                                    width=self._largeur_items*2,
                                                    font=self._font,
                                                    justify=ctk.LEFT)
         observations.grid(column=0, columnspan=2, row=5, rowspan=3, padx=5, pady=5)
 
         # Quantité de sachets
+        if "quantite_sachets" in infos.keys():
+            text : str = infos["quantite_sachets"]
+        else:
+            text : str = "Quantité de sachets non disponible"
         quantite_sachets : ctk.CTkLabel = ctk.CTkLabel(self._canva,
-                                                       text=infos["quantite_sachets"],
+                                                       text=text,
                                                        width=self._largeur_items,
                                                        height=self._hauteur_items,
                                                        font=self._font,

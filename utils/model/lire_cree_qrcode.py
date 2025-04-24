@@ -60,7 +60,7 @@ class Qrcode:
         # lire le QR code pris en photo
     def lecture_qrcode(self):
         # dictionnaire qui récuperera les info du QR code
-        dictionnaire = {"famille": "" , "espece":"" , "variete":"" , "date_depot":"","quantite_sachets":"","url_aide":""}
+        dictionnaire = {"famille": "" , "espece":"" , "variete":"" , "date_recolte":"","quantite_par_sachet":"","url_aide":""}
         img = Image.open(f"{self.__chemin_png}/qr.jpg") # ouverture du QR code
         decoded = decode(img) # décode l'image
         try:

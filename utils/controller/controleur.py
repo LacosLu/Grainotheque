@@ -113,22 +113,7 @@ class ControleurGrainotheque:
             print("Pas de caméra")"""
 
         # -- Récupération des informations du QR code --
-        print(self.__app_qr._qr.lecture_qrcode())
-
-        # --- Mise des informations dans un dictionnaire ---
-        self.__informations : dict[str, str|int] = {
-            "famille" : "famille",
-            "espece" : "espece",
-            "variete" : "variete",
-            "quantite_par_sachet" : 20,
-            "date_recolte" : "17/03/2025",
-            "prenom_depositaire" : "Luka",
-            "email_depositaire" : "toto@titi.com",
-            "date_depot" : "18/03/2025",
-            "nb_graines" : 400,
-            "observations" : "Franchement je sais aps\noui",
-            "quantite_sachets" : 20
-        }
+        self.__informations = self.__app_qr._qr.lecture_qrcode()
 
         # --- Génération de la page ---
         self.__retrait : Retrait = Retrait(self.__informations)
