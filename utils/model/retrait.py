@@ -5,11 +5,12 @@ from pymysql.cursors import DictCursor
 # création de la classe Retrait qui permet la lecture d'un QR code et la mise à jour de la base de donnée
 class RetraitBDD :
     # initialise les informations appeller dans les fonction de cette classe
-    def __init__(self):
+    def __init__(self,nom_centre_social):
         try:
             self.__connexion : Connection = connect(read_default_file="./utils/config/bdd.cnf") # element de connection à la BDD
         except:
             print("Connexion non réussie")
+        self.__nom_centre_social = nom_centre_social
 
     # mettre à jour la BDD
     def mise_à_jour_bdd(self,dictionnaire):
@@ -23,8 +24,11 @@ class RetraitBDD :
                 WHERE id_variete = (
                     SELECT id_variete FROM variete WHERE nom_variete = %s
                 )
+                AND WHERE id_grainotheque = (
+                    SELECT id_grainotheque FROME grainotheque WHERE nom_grainotheque = %s
+                )
                 """
-        param = (variete,)
+        param = (variete,self.__nom_centre_social,)
 
         try:
             # se connecte à la BDD et déclanche la requete 

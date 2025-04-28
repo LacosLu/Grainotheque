@@ -1,6 +1,7 @@
 # ----- IMPORTS -----
 # --- Biblitohèques externes ---
 import customtkinter as ctk
+import datetime
 
 # --- Bibliothèques internes ---
 try:
@@ -84,14 +85,12 @@ class Depot(Base):
         self._champs_entrees['email_depositaire'] = email_depositaire
         
         # Date du dépôt
-        date_depot : ctk.CTkEntry = ctk.CTkEntry(self._canva,
-                                                 placeholder_text="Date du dépôt",
+        date_depot : ctk.CTkEntry = ctk.CTkLabel(self._canva,
+                                                 text=datetime.date.today(),
                                                  width=self._largeur_items,
                                                  font=self._font,
                                                  height=self._hauteur_items)
         date_depot.grid(column=1, row=3, padx=5, pady=5)
-        date_depot.bind("<1>", lambda event: Base.ouvrir_clavier(event, date_depot))
-        self._champs_entrees["date_depot"] = date_depot
 
         # Nombre de graines
         self._nb_graines : ctk.CTkLabel = ctk.CTkLabel(self._canva,

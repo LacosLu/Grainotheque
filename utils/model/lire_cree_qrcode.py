@@ -3,7 +3,7 @@ from PIL import ImageFont, ImageDraw, Image # Importe le paquet PIL qui permet l
 from pyzbar.pyzbar import decode # Importe le paquet pyzbar installé pour la lecture de QR code
 
 # création de la classe Qrcode qui permet de créé et de sauvegarder celui-ci
-class Qrcode:
+class Lire_cree_qrcode:
     # initialise les informations appeller dans les fonction de cette classe qui à comme parametre le dictionnaire de données et la partie QRCODE du dossier config
     def __init__(self,config):
         self.__chemin_png = config["chemin_image"] # inisialise le chemin du future QR code donnée par le fichier config
@@ -28,7 +28,7 @@ class Qrcode:
 
 
 
-        data =f'Famille : {donnee["famille"]}\nEspèce : {donnee["espece"]}\nVariété : {donnee["variete"]}\nRécolté le : {donnee["date_recolte"]}\nNombre de graine dans le sachet : {donnee["quantite_par_sachet"]}\n\nurl_aide : {self.__url}{self.__espece}' # informations dont le QR code à besoi et informations qu'il devra fournir
+        data =f'Famille : {donnee["famille"]}\nEspèce : {donnee["espece"]}\nVariété : {donnee["variete"]}\nRécolté le : {donnee["date_recolte"]}\nNombre de graine dans le sachet : {donnee["quantite_par_sachet"]}\n\nurl_aide : {self.__url}' # informations dont le QR code à besoi et informations qu'il devra fournir
         self.__qr.add_data(data.encode("latin-1")) # convertir la chaîne en octets avant de l’ajouter au QR code en l'encodant en latin-1
         self.__qr.make(fit = True) # ne modifie pas la taille en fonction du nombre de donnée
         image_origine = self.__qr.make_image( fill_color = "black", back_color = "white") # défini les couleur de l'image

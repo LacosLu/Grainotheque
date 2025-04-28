@@ -12,4 +12,4 @@ adresse_mac = 04:7F:0E:5B:70:1C
 
 [QRCODE]
 chemin_image = ./utils/temp
-url = https://www.aujardin.info/plantes/
+url = https://www.telabotanica.org
