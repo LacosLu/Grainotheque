@@ -127,7 +127,7 @@ class ControleurGrainotheque:
         """Méthode qui va faire le lien entre le compte de graines dans le modèle et le renvoie du résultat dans la vue"""
         Camera.photographier()
 
-        compte_graines : int = ComptageGraines.comptage_contours()
+        compte_graines : int = Graines.comptage_contours()
 
         self.__depot._nb_graines.configure(text=compte_graines)
 

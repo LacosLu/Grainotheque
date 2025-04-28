@@ -5,7 +5,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # --- Bibliothèques internes ---
-from ..deep_learning import *
 try:
     from camera import Camera
 except:
