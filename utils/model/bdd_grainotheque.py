@@ -2,7 +2,6 @@
 from pymysql import connect, Connection
 from pymysql.cursors import DictCursor
 from typing import Any
-from datetime import datetime
 
 # ----- CLASSES -----
 class BDDGrainotheque:
