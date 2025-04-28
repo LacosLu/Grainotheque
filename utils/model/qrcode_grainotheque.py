@@ -3,7 +3,7 @@ from PIL import ImageFont, ImageDraw, Image # Importe le paquet PIL qui permet l
 from pyzbar.pyzbar import decode # Importe le paquet pyzbar installé pour la lecture de QR code
 
 # création de la classe Qrcode qui permet de créé et de sauvegarder celui-ci
-class Lire_cree_qrcode:
+class Qrcode_grainotheque:
     # initialise les informations appeller dans les fonction de cette classe qui à comme parametre le dictionnaire de données et la partie QRCODE du dossier config
     def __init__(self,config):
         self.__chemin_png = config["chemin_image"] # inisialise le chemin du future QR code donnée par le fichier config

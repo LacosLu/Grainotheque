@@ -2,12 +2,12 @@ from configparser import ConfigParser # Importation d'un packet permettent de li
 import os # Importation d'un packet permettent de modifier des document (dans le cas présent, suprimer une image)
 
 try:
-    from lire_cree_qrcode import Lire_cree_qrcode
-    from retrait import RetraitBDD
-    from imprimante import Imprimante
+    from utils.model.qrcode_grainotheque import Qrcode_grainotheque
+    from utils.model.bdd_retrait import RetraitBDD
+    from utils.model.imprimante import Imprimante
 except:
-    from .lire_cree_qrcode import Lire_cree_qrcode
-    from .retrait import RetraitBDD
+    from .qrcode_grainotheque import Qrcode_grainotheque
+    from .bdd_retrait import RetraitBDD
     from .imprimante import Imprimante
 
 # création de la classe Application qui permettera de géré l'ensemble du code
@@ -20,7 +20,7 @@ class ApplicationQR:
         self.__donnee : dict = {"famille": "Solanacées", "espece": "Tomate", "variete": "Grappe","date_recolte":"01.01.2025","quantite_par_sachet" : "20"} # créé un dictionnaire avec les informations présent dans le future QR code
         self.__nom_centre_social = nom_centre_social
         # relie les partits de config aux partit du code concerner 
-        self._qr = Lire_cree_qrcode(config = self.__config["QRCODE"])
+        self._qr = Qrcode_grainotheque(config = self.__config["QRCODE"])
         self._imprimante = Imprimante(config = self.__config["IMPRIMANTE"])
         self._retrait = RetraitBDD(self.__nom_centre_social)
 
