@@ -120,12 +120,12 @@ if __name__ == "__main__":
         ("petites\\noirs",       36,     "petites"),
         ("petites\\noirs2",      36,     "petites")
         ]
-    nb_epochs : int = 50
+    nb_epochs : int = 20
     model_name : str = "ternaire"
 
     # - run -
     rn_train.run(repertoires, nb_epochs, model_name)
 
     # -- Test --
-    chemin : str = ".\\temp\\test_moyennes_blanches.jpeg"
+    chemin : str = ".\\temp\\test_grosses_blanches.jpeg"
     print(rn_train.evaluate(chemin))

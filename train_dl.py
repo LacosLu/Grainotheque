@@ -169,12 +169,10 @@ class TrainDL(ABC):
         """
         img = cv.imread(cv.samples.findFile(chemin_img))
         img : torch.Tensor = torch.tensor(cv.resize(img, (32,32))).type(torch.float32)
-        plt.imshow(img.type(torch.uint8))
-        plt.show()
 
         self._net.eval()
 
         with torch.no_grad():
             out_data = self._net(self.norm(img.view(3,32,32)))
 
-        return out_data,(out_data == max(out_data[0])).nonzero(as_tuple=False)[0][1]
+        return (out_data == max(out_data[0])).nonzero(as_tuple=False)[0][1]
