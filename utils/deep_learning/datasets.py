@@ -9,7 +9,7 @@ class ComptageGraines(Dataset):
         """Dataset regroupant les images du compte des graines jusqu'à 144
         """
         super().__init__()
-        self.__root_dir : str = f"data\\{taille_couleur}"
+        self.__root_dir : str = f"/home/pi/Documents/Grainotheque/AppGrainotheque/utils/deep_learning/data/{taille_couleur}"
         self.__nb_photos : int = nb_photos
 
         # --- Itérateur ---
@@ -31,7 +31,7 @@ class ComptageGraines(Dataset):
             raise ValueError
         else:
             try:
-                img_path : str = f"{self.__root_dir}\\{idx+1}.jpg"
+                img_path : str = f"{self.__root_dir}/{idx+1}.jpg"
                 img = cv.imread(cv.samples.findFile(img_path))
                 return img,str(idx+1)
             except:

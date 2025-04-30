@@ -32,7 +32,7 @@ class TrainDLTernaire(TrainDL):
         self._net : Ternaire = Ternaire()
 
         if net != "":
-            self._net.load_state_dict(torch.load(f".\\models\\{net}", weights_only=False))
+            self._net.load_state_dict(torch.load(f"/home/pi/Documents/Grainotheque/AppGrainotheque/utils/deep_learning/models/{net}", weights_only=False))
 
         # --- Fonction d'optimisation ---
         self._optimizer : optim.SGD = optim.SGD(self._net.parameters(), lr=1e-2)

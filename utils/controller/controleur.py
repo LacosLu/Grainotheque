@@ -129,9 +129,10 @@ class ControleurGrainotheque:
         """Méthode qui va faire le lien entre le compte de graines dans le modèle et le renvoie du résultat dans la vue"""
         Camera.photographier()
 
-        compte_graines : int = self.__comptage.compter_graines()
+        nb_graines_par_sachet, compte_graines = self.__comptage.compter_graines()
 
         self.__depot._nb_graines.configure(text=compte_graines)
+        self.__depot._quantite_par_sachet.configure(text=nb_graines_par_sachet)
 
     def __annuler_depot(self) -> None:
         """Méthode qui va annuler le depot"""

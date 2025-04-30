@@ -18,20 +18,20 @@ except:
 
 # ----- CLASSE -----
 class CompterGraines:
-    __chemin_photo : str = "./temp/test_petites_noirs.jpeg"
+    __chemin_photo : str = "/home/pi/Documents/Grainotheque/AppGrainotheque/utils/temp/img.jpg"
     __repertoires : list[tuple[str,int,str]] = [
-        ("grosses\\blanches",    74),
-        ("grosses\\blanches2",   74),
-        ("grosses\\noirs",       74),
-        ("grosses\\noirs2",      74),
-        ("moyennes\\blanches",   74),
-        ("moyennes\\blanches2",  74),
-        ('moyennes\\noirs',      74),
-        ("moyennes\\noirs2",     74),
-        ("petites\\blanches",    74),
-        ("petites\\blanches2",   74),
-        ("petites\\noirs",       36),
-        ("petites\\noirs2",      36)
+        ("grosses/blanches",    74),
+        ("grosses/blanches2",   74),
+        ("grosses/noirs",       74),
+        ("grosses/noirs2",      74),
+        ("moyennes/blanches",   74),
+        ("moyennes/blanches2",  74),
+        ('moyennes/noirs',      74),
+        ("moyennes/noirs2",     74),
+        ("petites/blanches",    74),
+        ("petites/blanches2",   74),
+        ("petites/noirs",       36),
+        ("petites/noirs2",      36)
         ]
     
     def __init__(self):
@@ -89,10 +89,11 @@ class CompterGraines:
                  1/ecart_type[2]]
             )
 
-    def compter_graines(self):
+    def compter_graines(self) -> tuple[int]:
         nb_ternaire : int = int(self.__ternaire.evaluate(CompterGraines.__chemin_photo))
         match nb_ternaire:
             case 0:
+                nb_graines_par_sachet : int = 20
                 nb_binaire : int = int(self.__binaire.evaluate(CompterGraines.__chemin_photo))
                 match nb_binaire:
                     case 0:
@@ -100,6 +101,7 @@ class CompterGraines:
                     case 1:
                         nb_graines : int = int(self.__compte_gn.evaluate(CompterGraines.__chemin_photo))
             case 1:
+                nb_graines_par_sachet : int = 30
                 nb_binaire : int = int(self.__binaire.evaluate(CompterGraines.__chemin_photo))
                 match nb_binaire:
                     case 0:
@@ -107,13 +109,14 @@ class CompterGraines:
                     case 1:
                         nb_graines : int = int(self.__compte_mn.evaluate(CompterGraines.__chemin_photo))
             case 2:
+                nb_graines_par_sachet : int = 40
                 nb_binaire : int = int(self.__binaire.evaluate(CompterGraines.__chemin_photo))
                 match nb_binaire:
                     case 0:
                         nb_graines : int = int(self.__compte_pb.evaluate(CompterGraines.__chemin_photo))
                     case 1:
                         nb_graines : int = int(self.__compte_pn.evaluate(CompterGraines.__chemin_photo)) *5
-        return nb_graines+1
+        return nb_graines_par_sachet,nb_graines+1
 
 # ----- TEST -----
 if __name__ == "__main__":
