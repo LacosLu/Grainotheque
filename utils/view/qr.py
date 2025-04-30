@@ -17,9 +17,9 @@ class QR(Base):
 
         self.__photo = PhotoImage(master= self._canva,file="./utils/temp/qr.png")
 
-        self.__initialiser_champs()
+        self._initialiser_champs()
 
-    def __initialiser_champs(self):
+    def _initialiser_champs(self):
         """Initialisation des éléments de la page"""
         # QR code
         image : ctk.CTkLabel = ctk.CTkLabel(self._canva,text="", image=self.__photo)

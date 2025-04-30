@@ -1,10 +1,12 @@
 # ----- IMPORTS -----
 # --- Bibliothèques externes ---
 import customtkinter as ctk
+import datetime
 
 # --- Bibliothèques internes ---
 from ..view import *
 from ..model import *
+from ..deep_learning import *
 
 # ----- CLASSES -----
 class ControleurGrainotheque:
@@ -15,7 +17,8 @@ class ControleurGrainotheque:
 
         # --- Initialisation des models ---
         self.__bdd : BDDGrainotheque = BDDGrainotheque(nom_grainotheque)
-        self.__app_qr : ApplicationQR = ApplicationQR()
+        self.__app_qr : ApplicationQR = ApplicationQR(nom_grainotheque)
+        self.__comptage : CompterGraines = CompterGraines()
 
         # --- Initialisation des vues ---
         self.__accueil : Accueil = Accueil()
@@ -38,7 +41,7 @@ class ControleurGrainotheque:
 
         # --- Besoin de réaliser la requête dans le modèle ---
         if self.__bdd.recherche_graine(self.__informations) :
-            quantite_par_sachet : int = self.__bdd.recuperer_quantite_par_sachet(self.__informations)
+            quantite_par_sachet : int = self.__bdd.recuperer_graine(self.__informations)["quantite_graines_sachet"]
         else :
             quantite_par_sachet : str = "Nouvelle graine"
         
@@ -65,6 +68,9 @@ class ControleurGrainotheque:
             else:
                 self.__informations[key] = object.get()
         self.__informations["prenom_depositaire"].capitalize()
+        self.__informations["date_recolte"] = datetime.datetime.strptime(self.__informations["date_recolte"], "%d/%m/%Y").date().strftime("%Y-%m-%d")
+        self.__informations["quantite_graine"] = int(self.__depot._nb_graines.cget("text"))
+        self.__informations["quantite_par_sachet"] = self.__depot._quantite_par_sachet.cget("text")
 
         # --- Création du QR ---
         self.__qrcode : str = self.__app_qr._qr.creation_qrcode(self.__informations)
@@ -81,6 +87,36 @@ class ControleurGrainotheque:
 
     def __imprimer_qr(self) -> None:
         """Impression du qr code"""
+        # --- Requête famille ---
+        if not self.__bdd.rechercher_famille(self.__informations):
+            self.__bdd.ajouter_famille(self.__informations)
+
+        # --- Requête espèce ---
+        if not self.__bdd.rechercher_espece(self.__informations):
+            self.__bdd.ajouter_espece(self.__informations)
+
+        # --- Requête variété ---
+        if not self.__bdd.rechercher_variete(self.__informations):
+            self.__bdd.ajouter_variete(self.__informations)
+
+        # --- Requête graine ---
+        if not self.__bdd.recherche_graine(self.__informations):
+            self.__bdd.ajouter_graine(self.__informations)
+        else:
+            nb_sachets : int = round(self.__informations["quantite_graine"]/self.__informations["quantite_par_sachet"],0)
+            for i in range(nb_sachets):
+                self.__bdd.incrementer_graine(self.__informations)
+            if nb_sachets == 0:
+                self.__bdd.incrementer_graine(self.__informations)
+
+        # --- Requête dépositaire ---
+        if not self.__bdd.rechercher_despositaire(self.__informations):
+            self.__bdd.ajouter_depositaire(self.__informations)
+
+        # --- Requête dépôt ---
+        self.__bdd.ajouter_depot(self.__informations)
+
+        # --- Fin de fonction ---
         self.__app_qr._imprimante.impretion_qrcode(self.__qrcode)
         self.__qr.fermer()
         self.__depot.fermer()
@@ -93,11 +129,10 @@ class ControleurGrainotheque:
         """Méthode qui va faire le lien entre le compte de graines dans le modèle et le renvoie du résultat dans la vue"""
         Camera.photographier()
 
-        compte_graines : int = ComptageGraines.comptage_contours()
+        nb_graines_par_sachet, compte_graines = self.__comptage.compter_graines()
 
         self.__depot._nb_graines.configure(text=compte_graines)
-
-        print("Comptage")
+        self.__depot._quantite_par_sachet.configure(text=nb_graines_par_sachet)
 
     def __annuler_depot(self) -> None:
         """Méthode qui va annuler le depot"""
@@ -106,21 +141,19 @@ class ControleurGrainotheque:
     def __scan(self) -> None:
         """Scan du QR code mis sous la caméra"""
         # --- Récupération des données du QR code dans le modèle et dans la base de données ---
+        # -- Prise de photo --
+        try:
+            Camera.photographier("qr")
+        except:
+            print("Pas de caméra")
 
-        # --- Mise des informations dans un dictionnaire ---
-        self.__informations : dict[str, str|int] = {
-            "famille" : "famille",
-            "espece" : "espece",
-            "variete" : "variete",
-            "quantite_par_sachet" : 20,
-            "date_recolte" : "17/03/2025",
-            "prenom_depositaire" : "Luka",
-            "email_depositaire" : "toto@titi.com",
-            "date_depot" : "18/03/2025",
-            "nb_graines" : 400,
-            "observations" : "Franchement je sais aps\noui",
-            "quantite_sachets" : 20
-        }
+        # -- Récupération des informations du QR code --
+        self.__informations = self.__app_qr._qr.lecture_qrcode()
+
+        # --- Requête pour récupérer les informations supplémentaires ---
+        info_graines : dict = self.__bdd.recuperer_graine(self.__informations)
+        self.__informations["quantite_sachets"] = info_graines["quantite_sachet"]
+        self.__informations["nb_graines"] = int(self.__informations["quantite_sachets"])*int(self.__informations["quantite_par_sachet"])
 
         # --- Génération de la page ---
         self.__retrait : Retrait = Retrait(self.__informations)
@@ -133,4 +166,5 @@ class ControleurGrainotheque:
 
     def __validation_retrait(self) -> None:
         """Validation du retrait"""
+        self.__app_qr._retrait.mise_à_jour_bdd(self.__informations)
         self.__retrait.fermer()

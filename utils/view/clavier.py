@@ -23,11 +23,13 @@ class Clavier:
         self.__root : ctk.CTk = ctk.CTk()
         self.__root.title("Clavier")
 
-        self.__entry = entree
+        self.__entry : ctk.CTkEntry = entree
 
         self.__placement_bouttons()
 
-    def __placement_bouttons(self):
+    def __placement_bouttons(self) -> None:
+        """Placement des bouttons du clavier
+        """
         for row, keys in enumerate(Clavier.__buttons):
             for col, key in enumerate(keys):
                 if key == 'Space':
@@ -63,20 +65,33 @@ class Clavier:
                                            command=lambda key=key: self.__press(key))
                     button.grid(row=row + 1, column=col, padx=5, pady=5)
 
-    def __press(self, key):
+    def __press(self, key : str) -> None:
+        """Action à réaliser si une touche du clavier est pressée
+
+        :param key: caractère
+        :type key: str
+        """
         self.__entry.insert(ctk.END, key)
 
-    def __backspace(self):
+    def __backspace(self) -> None:
+        """Action à réaliser en cas de suppression de caractère
+        """
         current_text = self.__entry.get()
         self.__entry.delete(len(current_text) - 1, ctk.END)
 
-    def __add_space(self):
+    def __add_space(self) -> None:
+        """Action à réaliser si la barre Espace est pressée
+        """
         self.__entry.insert(ctk.END, " ")
 
-    def __terminer(self):
+    def __terminer(self) -> None:
+        """Action à réaliser si l'utilisateur à terminer
+        """
         self.__root.destroy()
 
-    def run(self):
+    def run(self) -> None:
+        """Lancement de la fenêtre
+        """
         self.__root.mainloop()
 
 # ----- PROGRAMME -----

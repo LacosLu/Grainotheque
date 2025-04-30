@@ -36,13 +36,13 @@ class Base:
         self._bouttons : dict[str,ctk.CTkButton] = {}
 
     @staticmethod
-    def ouvrir_clavier(event, entree : ctk.CTkEntry):
+    def ouvrir_clavier(event, entree : ctk.CTkEntry) -> None:
         """Fonction d'ouverture du clavier tactile"""
         sortie = Clavier(entree)
         print(sortie)
 
     @abstractmethod
-    def __initialiser_champs(self) -> None:
+    def _initialiser_champs(self) -> None:
         """Initialise les champs de la page"""
         pass
 

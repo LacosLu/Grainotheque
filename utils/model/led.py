@@ -1,4 +1,7 @@
-from rpi5_ws2812.ws2812 import Color, WS2812SpiDriver
+try:
+    from rpi5_ws2812.ws2812 import Color, WS2812SpiDriver
+except:
+    pass
 
 class Led:
 

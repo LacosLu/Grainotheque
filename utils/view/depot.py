@@ -1,6 +1,7 @@
 # ----- IMPORTS -----
 # --- Biblitohèques externes ---
 import customtkinter as ctk
+import datetime
 
 # --- Bibliothèques internes ---
 try:
@@ -14,9 +15,9 @@ class Depot(Base):
         """Page de l'application de la station où la graine est existante dans la base de données"""
         super().__init__()
 
-        self.__initialiser_champs(informations)
+        self._initialiser_champs(informations)
 
-    def __initialiser_champs(self, informations : dict[str, str|int]) -> None:
+    def _initialiser_champs(self, informations : dict[str, str|int]) -> None:
         # Famille
         famille : ctk.CTkLabel = ctk.CTkLabel(self._canva,
                                               text=informations["famille"],
@@ -84,14 +85,12 @@ class Depot(Base):
         self._champs_entrees['email_depositaire'] = email_depositaire
         
         # Date du dépôt
-        date_depot : ctk.CTkEntry = ctk.CTkEntry(self._canva,
-                                                 placeholder_text="Date du dépôt",
+        date_depot : ctk.CTkEntry = ctk.CTkLabel(self._canva,
+                                                 text=datetime.date.today(),
                                                  width=self._largeur_items,
                                                  font=self._font,
                                                  height=self._hauteur_items)
         date_depot.grid(column=1, row=3, padx=5, pady=5)
-        date_depot.bind("<1>", lambda event: Base.ouvrir_clavier(event, date_depot))
-        self._champs_entrees["date_depot"] = date_depot
 
         # Nombre de graines
         self._nb_graines : ctk.CTkLabel = ctk.CTkLabel(self._canva,
