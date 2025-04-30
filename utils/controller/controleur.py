@@ -6,6 +6,7 @@ import datetime
 # --- Bibliothèques internes ---
 from ..view import *
 from ..model import *
+from ..deep_learning import *
 
 # ----- CLASSES -----
 class ControleurGrainotheque:
@@ -17,6 +18,7 @@ class ControleurGrainotheque:
         # --- Initialisation des models ---
         self.__bdd : BDDGrainotheque = BDDGrainotheque(nom_grainotheque)
         self.__app_qr : ApplicationQR = ApplicationQR(nom_grainotheque)
+        self.__comptage : CompterGraines = CompterGraines()
 
         # --- Initialisation des vues ---
         self.__accueil : Accueil = Accueil()
@@ -127,11 +129,9 @@ class ControleurGrainotheque:
         """Méthode qui va faire le lien entre le compte de graines dans le modèle et le renvoie du résultat dans la vue"""
         Camera.photographier()
 
-        compte_graines : int = Graines.comptage_contours()
+        compte_graines : int = self.__comptage.compter_graines()
 
         self.__depot._nb_graines.configure(text=compte_graines)
-
-        print("Comptage")
 
     def __annuler_depot(self) -> None:
         """Méthode qui va annuler le depot"""
