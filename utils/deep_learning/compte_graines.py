@@ -55,8 +55,8 @@ class CompterGraines:
         self.__rns.append(self.__compte_pn)
 
         for rn in self.__rns:
-            rn.norm = self.norm
-            rn.unorm = self.unorm
+            rn.norm = self.__norm
+            rn.unorm = self.__unorm
 
     def __calcul_normalisation(self):
         # --- Récupération des datasets ---
@@ -78,9 +78,9 @@ class CompterGraines:
         ecart_type = imgs.view(3,-1).std(dim=1)
 
         # - Fonction de normalisation -
-        self.norm = transforms.Normalize(moyenne, ecart_type)
+        self.__norm = transforms.Normalize(moyenne, ecart_type)
 
-        self.unorm = transforms.Normalize(
+        self.__unorm = transforms.Normalize(
             mean=[-1*moyenne[0]/ecart_type[0],
                   -1*moyenne[1]/ecart_type[1],
                   -1*moyenne[2]/ecart_type[2]],
@@ -89,7 +89,7 @@ class CompterGraines:
                  1/ecart_type[2]]
             )
 
-    def compter_graines(self) -> tuple[int]:
+    def compter_graines(self) -> tuple[int,int]:
         nb_ternaire : int = int(self.__ternaire.evaluate(CompterGraines.__chemin_photo))
         match nb_ternaire:
             case 0:
