@@ -4,8 +4,6 @@ from datasets import ComptageGraines
 
 # --- Bibliothèques externes ---
 import unittest
-from torch.utils.data import Dataset
-import cv2 as cv
 
 # ----- CLASSE -----
 class Test_ComptageGraines(unittest.TestCase):
