@@ -7,6 +7,8 @@ import torch.nn.functional as F
 # ----- CLASSE -----
 class Binaire(nn.Module):
     def __init__(self):
+        """Réseau de neuronnes de classification binaire
+        """
         super().__init__()
         self.__conv1 = nn.Conv2d(3, 16, kernel_size=3, padding=1)
         self.__conv2 = nn.Conv2d(16, 8, kernel_size=3, padding=1)

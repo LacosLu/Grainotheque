@@ -7,6 +7,8 @@ import torch.nn.functional as F
 # ----- CLASSE -----
 class Compte(nn.Module):
     def __init__(self):
+        """Réseau de neuronnes pséparant les images en 74 catégories
+        """
         super().__init__()
         self.__conv1 = nn.Conv2d(3, 16, kernel_size=3, padding=1)
         self.__conv2 = nn.Conv2d(16, 8, kernel_size=3, padding=1)
