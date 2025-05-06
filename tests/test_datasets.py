@@ -21,6 +21,7 @@ class Test_ComptageGraines(unittest.TestCase):
 
     def test_iteration(self):
         i : int = 0
-        for _,label in self.__dataset:
+        for img,label in self.__dataset:
+            self.assertEqual(img.all(), self.__dataset[i][0].all())
             self.assertEqual(label, self.__dataset[i][1])
             i += 1
