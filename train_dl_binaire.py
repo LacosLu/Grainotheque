@@ -107,18 +107,18 @@ if __name__ == "__main__":
     # -- Lancement --
     # - Paramètres -
     repertoires : list[tuple[str,int,str]] = [
-        ("grosses\\blanches",    74,     "grosses"),
-        ("grosses\\blanches2",   74,     "grosses"),
-        ("grosses\\noirs",       74,     "grosses"),
-        ("grosses\\noirs2",      74,     "grosses"),
-        ("moyennes\\blanches",   74,     "grosses"),
-        ("moyennes\\blanches2",  74,     "grosses"),
-        ('moyennes\\noirs',      74,     "petites"),
-        ("moyennes\\noirs2",     74,     "petites"),
-        ("petites\\blanches",    74,     "petites"),
-        ("petites\\blanches2",   74,     "petites"),
-        ("petites\\noirs",       36,     "petites"),
-        ("petites\\noirs2",      36,     "petites")
+        ("grosses\\blanches",    74,     "blanches"),
+        ("grosses\\blanches2",   74,     "blanches"),
+        ("grosses\\noirs",       74,     "noirs"),
+        ("grosses\\noirs2",      74,     "noirs"),
+        ("moyennes\\blanches",   74,     "blanches"),
+        ("moyennes\\blanches2",  74,     "blanches"),
+        ('moyennes\\noirs',      74,     "noirs"),
+        ("moyennes\\noirs2",     74,     "noirs"),
+        ("petites\\blanches",    74,     "blanches"),
+        ("petites\\blanches2",   74,     "blanches"),
+        ("petites\\noirs",       36,     "noirs"),
+        ("petites\\noirs2",      36,     "noirs")
         ]
     nb_epochs : int = 10
     model_name : str = "binaire"
@@ -127,5 +127,5 @@ if __name__ == "__main__":
     rn_train.run(repertoires, nb_epochs, model_name)
 
     # -- Test --
-    chemin : str = ".\\temp\\test_grosses_noirs.jpeg"
+    chemin : str = ".\\temp\\test_petites_blanches.jpeg"
     print(rn_train.evaluate(chemin))

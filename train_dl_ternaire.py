@@ -107,6 +107,15 @@ if __name__ == "__main__":
     # -- Lancement --
     # - Paramètres -
     repertoires : list[tuple[str,int,str]] = [
+        ("grosses\\blanches",    5,     "grosses"),
+        ("grosses\\blanches2",   5,     "grosses"),
+        ("moyennes\\blanches",   5,     "moyennes"),
+        ("moyennes\\blanches2",  5,     "moyennes"),
+        ("petites\\blanches",    5,     "petites"),
+        ("petites\\blanches2",   5,     "petites")
+        ]
+    
+    """[
         ("grosses\\blanches",    74,     "grosses"),
         ("grosses\\blanches2",   74,     "grosses"),
         ("grosses\\noirs",       74,     "grosses"),
@@ -119,7 +128,8 @@ if __name__ == "__main__":
         ("petites\\blanches2",   74,     "petites"),
         ("petites\\noirs",       36,     "petites"),
         ("petites\\noirs2",      36,     "petites")
-        ]
+        ]"""
+    
     nb_epochs : int = 20
     model_name : str = "ternaire"
 
@@ -127,5 +137,6 @@ if __name__ == "__main__":
     rn_train.run(repertoires, nb_epochs, model_name)
 
     # -- Test --
-    chemin : str = ".\\temp\\test_grosses_blanches.jpeg"
+    #chemin : str = ".\\temp\\test_petites_blanches.jpeg"
+    chemin : str = ".\\data\\petites\\blanches\\1.jpg"
     print(rn_train.evaluate(chemin))
