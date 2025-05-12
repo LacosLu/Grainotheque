@@ -11,7 +11,7 @@ class Led:
 
     def turn_on(self):
         if not self.is_turn_on:
-            self.strip.set_all_pixels(Color(255, 255, 255))
+            self.strip.set_all_pixels(Color(255, 255, 200))
             self.strip.show()
             self.is_turn_on = True
             print("LED : Allumer")

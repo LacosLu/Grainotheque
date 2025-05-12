@@ -18,62 +18,62 @@ except:
 
 # ----- CLASSE -----
 class CompterGraines:
-    __chemin_photo_compte : str = "./temp/img.jpg"
-    __chemin_photo_taille : str = "./temp/img_taille.jpg"
+    __chemin_photo_compte : str = "/home/pi/Documents/Grainotheque/AppGrainotheque/utils/temp/img.jpg"
+    __chemin_photo_taille : str = "/home/pi/Documents/Grainotheque/AppGrainotheque/utils/temp/img_taille.jpg"
     __repertoires_rns : list[list[tuple[str,int,str]]] = [
         [
-            ("grosses\\blanches",    74),
-            ("grosses\\blanches2",   74),
-            ("moyennes\\blanches",   74),
-            ("moyennes\\blanches2",  74),
-            ("petites\\blanches",    74),
-            ("petites\\blanches2",   74)
+            ("grosses/blanches",    74),
+            ("grosses/blanches2",   74),
+            ("moyennes/blanches",   74),
+            ("moyennes/blanches2",  74),
+            ("petites/blanches",    74),
+            ("petites/blanches2",   74)
         ],
         [
-            ("grosses\\noirs",       74),
-            ("grosses\\noirs2",      74),
-            ('moyennes\\noirs',      74),
-            ("moyennes\\noirs2",     74),
-            ("petites\\noirs",       36),
-            ("petites\\noirs2",      36)
+            ("grosses/noirs",       74),
+            ("grosses/noirs2",      74),
+            ('moyennes/noirs',      74),
+            ("moyennes/noirs2",     74),
+            ("petites/noirs",       36),
+            ("petites/noirs2",      36)
         ],
         [
-            ("grosses\\blanches",    74),
-            ("grosses\\blanches2",   74),
-            ("grosses\\noirs",       74),
-            ("grosses\\noirs2",      74),
-            ("moyennes\\blanches",   74),
-            ("moyennes\\blanches2",  74),
-            ('moyennes\\noirs',      74),
-            ("moyennes\\noirs2",     74),
-            ("petites\\blanches",    74),
-            ("petites\\blanches2",   74),
-            ("petites\\noirs",       36),
-            ("petites\\noirs2",      36)
+            ("grosses/blanches",    74),
+            ("grosses/blanches2",   74),
+            ("grosses/noirs",       74),
+            ("grosses/noirs2",      74),
+            ("moyennes/blanches",   74),
+            ("moyennes/blanches2",  74),
+            ('moyennes/noirs',      74),
+            ("moyennes/noirs2",     74),
+            ("petites/blanches",    74),
+            ("petites/blanches2",   74),
+            ("petites/noirs",       36),
+            ("petites/noirs2",      36)
         ],
         [
-            ("grosses\\blanches",    74),
-            ("grosses\\blanches2",   74)
+            ("grosses/blanches",    74),
+            ("grosses/blanches2",   74)
         ],
         [
-            ("grosses\\noirs",       74),
-            ("grosses\\noirs2",      74)
+            ("grosses/noirs",       74),
+            ("grosses/noirs2",      74)
         ],
         [
-            ("moyennes\\blanches",   74),
-            ("moyennes\\blanches2",  74)
+            ("moyennes/blanches",   74),
+            ("moyennes/blanches2",  74)
         ],
         [
-            ('moyennes\\noirs',      74),
-            ("moyennes\\noirs2",     74)
+            ('moyennes/noirs',      74),
+            ("moyennes/noirs2",     74)
         ],
         [
-            ("petites\\blanches",    74),
-            ("petites\\blanches2",   74)
+            ("petites/blanches",    74),
+            ("petites/blanches2",   74)
         ],
         [
-            ("petites\\noirs",       36),
-            ("petites\\noirs2",      36)
+            ("petites/noirs",       36),
+            ("petites/noirs2",      36)
         ]
         ]
     

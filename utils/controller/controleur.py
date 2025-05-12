@@ -144,6 +144,8 @@ class ControleurGrainotheque:
         """Prend la photo de toutes les graines et les comptes"""
         Camera.photographier()
 
+        self.__alert.fermer()
+
         nb_graines_par_sachet, compte_graines = self.__comptage.compter_graines()
 
         self.__depot._nb_graines.configure(text=compte_graines)
