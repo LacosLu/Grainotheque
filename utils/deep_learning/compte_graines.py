@@ -18,27 +18,71 @@ except:
 
 # ----- CLASSE -----
 class CompterGraines:
-    __chemin_photo : str = "/home/pi/Documents/Grainotheque/AppGrainotheque/utils/temp/img.jpg"
-    __repertoires : list[tuple[str,int,str]] = [
-        ("grosses/blanches",    74),
-        ("grosses/blanches2",   74),
-        ("grosses/noirs",       74),
-        ("grosses/noirs2",      74),
-        ("moyennes/blanches",   74),
-        ("moyennes/blanches2",  74),
-        ('moyennes/noirs',      74),
-        ("moyennes/noirs2",     74),
-        ("petites/blanches",    74),
-        ("petites/blanches2",   74),
-        ("petites/noirs",       36),
-        ("petites/noirs2",      36)
+    __chemin_photo_compte : str = "./temp/img.jpg"
+    __chemin_photo_taille : str = "./temp/img_taille.jpg"
+    __repertoires_rns : list[list[tuple[str,int,str]]] = [
+        [
+            ("grosses\\blanches",    74),
+            ("grosses\\blanches2",   74),
+            ("moyennes\\blanches",   74),
+            ("moyennes\\blanches2",  74),
+            ("petites\\blanches",    74),
+            ("petites\\blanches2",   74)
+        ],
+        [
+            ("grosses\\noirs",       74),
+            ("grosses\\noirs2",      74),
+            ('moyennes\\noirs',      74),
+            ("moyennes\\noirs2",     74),
+            ("petites\\noirs",       36),
+            ("petites\\noirs2",      36)
+        ],
+        [
+            ("grosses\\blanches",    74),
+            ("grosses\\blanches2",   74),
+            ("grosses\\noirs",       74),
+            ("grosses\\noirs2",      74),
+            ("moyennes\\blanches",   74),
+            ("moyennes\\blanches2",  74),
+            ('moyennes\\noirs',      74),
+            ("moyennes\\noirs2",     74),
+            ("petites\\blanches",    74),
+            ("petites\\blanches2",   74),
+            ("petites\\noirs",       36),
+            ("petites\\noirs2",      36)
+        ],
+        [
+            ("grosses\\blanches",    74),
+            ("grosses\\blanches2",   74)
+        ],
+        [
+            ("grosses\\noirs",       74),
+            ("grosses\\noirs2",      74)
+        ],
+        [
+            ("moyennes\\blanches",   74),
+            ("moyennes\\blanches2",  74)
+        ],
+        [
+            ('moyennes\\noirs',      74),
+            ("moyennes\\noirs2",     74)
+        ],
+        [
+            ("petites\\blanches",    74),
+            ("petites\\blanches2",   74)
+        ],
+        [
+            ("petites\\noirs",       36),
+            ("petites\\noirs2",      36)
+        ]
         ]
     
     def __init__(self):
-        self.__calcul_normalisation()
         self.__rns : list[TrainDLBinaire|TrainDLCompte|TrainDLTernaire] = []
-        self.__ternaire : TrainDLTernaire = TrainDLTernaire(f"ternaire.pt")
-        self.__rns.append(self.__ternaire)
+        self.__ternaire_b : TrainDLTernaire = TrainDLTernaire(f"ternaire_b.pt")
+        self.__rns.append(self.__ternaire_b)
+        self.__ternaire_n : TrainDLTernaire = TrainDLTernaire(f'ternaire_n.pt')
+        self.__rns.append(self.__ternaire_n)
         self.__binaire : TrainDLBinaire = TrainDLBinaire(f"binaire.pt")
         self.__rns.append(self.__binaire)
         self.__compte_gb : TrainDLCompte = TrainDLCompte(f"compte_grosses_blanches.pt")
@@ -54,14 +98,13 @@ class CompterGraines:
         self.__compte_pn : TrainDLCompte = TrainDLCompte(f"compte_petites_noirs.pt")
         self.__rns.append(self.__compte_pn)
 
-        for rn in self.__rns:
-            rn.norm = self.__norm
-            rn.unorm = self.__unorm
+        for idx in range(len(CompterGraines.__repertoires_rns)):
+            self.__calcul_normalisation(CompterGraines.__repertoires_rns[idx], self.__rns[idx])
 
-    def __calcul_normalisation(self):
+    def __calcul_normalisation(self, noms_nombres_fichiers : list[tuple[str,int]], rn : TrainDLBinaire|TrainDLCompte|TrainDLTernaire):
         # --- Récupération des datasets ---
         datasets : list[ComptageGraines] = []
-        for chemin, nb_photos in CompterGraines.__repertoires:
+        for chemin, nb_photos in noms_nombres_fichiers:
             datasets.append(ComptageGraines(chemin, nb_photos))
 
         # - Création de la liste d'images -
@@ -78,9 +121,9 @@ class CompterGraines:
         ecart_type = imgs.view(3,-1).std(dim=1)
 
         # - Fonction de normalisation -
-        self.__norm = transforms.Normalize(moyenne, ecart_type)
+        norm = transforms.Normalize(moyenne, ecart_type)
 
-        self.__unorm = transforms.Normalize(
+        unorm = transforms.Normalize(
             mean=[-1*moyenne[0]/ecart_type[0],
                   -1*moyenne[1]/ecart_type[1],
                   -1*moyenne[2]/ecart_type[2]],
@@ -88,35 +131,38 @@ class CompterGraines:
                  1/ecart_type[1],
                  1/ecart_type[2]]
             )
+        
+        rn.norm = norm
+        rn.unorm = unorm
 
-    def compter_graines(self) -> tuple[int,int]:
-        nb_ternaire : int = int(self.__ternaire.evaluate(CompterGraines.__chemin_photo))
-        match nb_ternaire:
+    def compter_graines(self):
+        nb_binaire : int = int(self.__binaire.evaluate(CompterGraines.__chemin_photo_compte))
+        match nb_binaire:
             case 0:
-                nb_graines_par_sachet : int = 20
-                nb_binaire : int = int(self.__binaire.evaluate(CompterGraines.__chemin_photo))
-                match nb_binaire:
+                nb_ternaire_b : int = int(self.__ternaire_b.evaluate(CompterGraines.__chemin_photo_taille))
+                match nb_ternaire_b:
                     case 0:
-                        nb_graines : int = int(self.__compte_gb.evaluate(CompterGraines.__chemin_photo))
+                        nb_graines_par_sachet : int = 20
+                        nb_graines : int = int(self.__compte_gb.evaluate(CompterGraines.__chemin_photo_compte)) + 1
                     case 1:
-                        nb_graines : int = int(self.__compte_gn.evaluate(CompterGraines.__chemin_photo))
+                        nb_graines_par_sachet : int = 30
+                        nb_graines : int = int(self.__compte_mb.evaluate(CompterGraines.__chemin_photo_compte)) + 1
+                    case 2:
+                        nb_graines_par_sachet : int = 40
+                        nb_graines : int = int(self.__compte_pb.evaluate(CompterGraines.__chemin_photo_compte)) + 1
             case 1:
-                nb_graines_par_sachet : int = 30
-                nb_binaire : int = int(self.__binaire.evaluate(CompterGraines.__chemin_photo))
-                match nb_binaire:
+                nb_ternaire_n : int = int(self.__ternaire_n.evaluate(CompterGraines.__chemin_photo_taille))
+                match nb_ternaire_n:
                     case 0:
-                        nb_graines : int = int(self.__compte_mb.evaluate(CompterGraines.__chemin_photo))
+                        nb_graines_par_sachet : int = 20
+                        nb_graines : int = int(self.__compte_gn.evaluate(CompterGraines.__chemin_photo_compte)) + 1
                     case 1:
-                        nb_graines : int = int(self.__compte_mn.evaluate(CompterGraines.__chemin_photo))
-            case 2:
-                nb_graines_par_sachet : int = 40
-                nb_binaire : int = int(self.__binaire.evaluate(CompterGraines.__chemin_photo))
-                match nb_binaire:
-                    case 0:
-                        nb_graines : int = int(self.__compte_pb.evaluate(CompterGraines.__chemin_photo))
-                    case 1:
-                        nb_graines : int = int(self.__compte_pn.evaluate(CompterGraines.__chemin_photo)) *5
-        return nb_graines_par_sachet,nb_graines+1
+                        nb_graines_par_sachet : int = 30
+                        nb_graines : int = int(self.__compte_mn.evaluate(CompterGraines.__chemin_photo_compte)) + 1
+                    case 2:
+                        nb_graines_par_sachet : int = 40
+                        nb_graines : int = (int(self.__compte_pn.evaluate(CompterGraines.__chemin_photo_compte)) + 1) * 5
+        return nb_graines_par_sachet,nb_graines
 
 # ----- TEST -----
 if __name__ == "__main__":

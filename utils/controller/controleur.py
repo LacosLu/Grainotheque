@@ -25,6 +25,7 @@ class ControleurGrainotheque:
         self.__depot : Depot
         self.__retrait : Retrait
         self.__qr : QR
+        self.__alert : Alert
 
         # -- Bouttons de la vue d'accueil --
         self.__accueil._bouttons["recherche"].configure(command=self.__recherche)
@@ -54,7 +55,7 @@ class ControleurGrainotheque:
         # --- Bouttons de cette nouvelle vue ---
         self.__depot._bouttons["nb_graines"].configure(command=self.__association_comptage_vue)
         self.__depot._bouttons["validation"].configure(command=self.__validation_depot)
-        self.__depot._bouttons["annulation"].configure(command=self.__annuler_depot)
+        self.__depot._bouttons["annulation"].configure(command=self.__depot.fermer)
 
         # --- Lancement de la vue ---
         self.__depot.run()
@@ -80,7 +81,7 @@ class ControleurGrainotheque:
 
         # --- Bouttons de la vue ---
         self.__qr._bouttons["impression"].configure(command=self.__imprimer_qr)
-        self.__qr._bouttons["annulation"].configure(command=self.__annuler_impression)
+        self.__qr._bouttons["annulation"].configure(command=self.__qr.fermer)
         
         # --- Lancement de la vue ---
         self.__qr.run()
@@ -121,22 +122,32 @@ class ControleurGrainotheque:
         self.__qr.fermer()
         self.__depot.fermer()
 
-    def __annuler_impression(self) -> None:
-        """Annulation de l'impression"""
-        self.__qr.fermer()
-
     def __association_comptage_vue(self) -> None:
         """Méthode qui va faire le lien entre le compte de graines dans le modèle et le renvoie du résultat dans la vue"""
+        self.__alert = Alert("Déposez qu'une seule graine")
+
+        self.__alert._bouttons["validation"].configure(command=self.__prendre_photo_taille)
+        self.__alert._bouttons["annulation"].configure(command=self.__alert.fermer)
+
+    def __prendre_photo_taille(self) -> None:
+        """Prend une photo, l'enregistre sous le nom de img_taille et continuer la procédure de comptage"""
+        Camera.photographier("img_taille")
+
+        self.__alert.fermer()
+
+        self.__alert = Alert("Déposez le reste des graines à plat")
+
+        self.__alert._bouttons["validation"].configure(command=self.__prendre_photo_compter_graines)
+        self.__alert._bouttons["annulation"].configure(command=self.__alert.fermer)
+
+    def __prendre_photo_compter_graines(self) -> None:
+        """Prend la photo de toutes les graines et les comptes"""
         Camera.photographier()
 
         nb_graines_par_sachet, compte_graines = self.__comptage.compter_graines()
 
         self.__depot._nb_graines.configure(text=compte_graines)
         self.__depot._quantite_par_sachet.configure(text=nb_graines_par_sachet)
-
-    def __annuler_depot(self) -> None:
-        """Méthode qui va annuler le depot"""
-        self.__depot.fermer()
 
     def __scan(self) -> None:
         """Scan du QR code mis sous la caméra"""
