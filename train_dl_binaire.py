@@ -120,7 +120,7 @@ if __name__ == "__main__":
         ("petites\\noirs",       36,     "noirs"),
         ("petites\\noirs2",      36,     "noirs")
         ]
-    nb_epochs : int = 10
+    nb_epochs : int = 100
     model_name : str = "binaire"
 
     # - run -

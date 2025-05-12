@@ -98,14 +98,15 @@ if __name__ == "__main__":
     # - Paramètres -
     repertoires : list[tuple[str,int]] = [
         ("grosses\\noirs",    74),
-        ("grosses\\noirs",   74)
+        ("grosses\\noirs2",   74)
         ]
-    nb_epochs : int = 20
+    nb_epochs : int = 100
     model_name : str = "compte_grosses_noirs"
 
     # - run -
     rn_train.run(repertoires, nb_epochs, model_name)
 
     # -- Test --
-    chemin : str = ".\\temp\\test_petites_noirs.jpeg"
-    print(rn_train.evaluate(chemin))
+    chemin : str = ".\\temp\\test_grosses_noirs.jpeg"
+    #chemin :str = ".\\data\\grosses\\blanches\\20.jpg"
+    print(rn_train.evaluate(chemin)+1)

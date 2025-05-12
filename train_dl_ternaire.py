@@ -102,7 +102,7 @@ class TrainDLTernaire(TrainDL):
 # ----- PROGRAMME -----
 if __name__ == "__main__":
     # -- Initialisation des éléments --
-    rn_train = TrainDLTernaire()
+    rn_train = TrainDLTernaire("ternaire_b.pt")
 
     # -- Lancement --
     # - Paramètres -
@@ -116,22 +116,24 @@ if __name__ == "__main__":
         ]
     
     """[
-        ("grosses\\blanches",    74,     "grosses"),
-        ("grosses\\blanches2",   74,     "grosses"),
-        ("grosses\\noirs",       74,     "grosses"),
-        ("grosses\\noirs2",      74,     "grosses"),
-        ("moyennes\\blanches",   74,     "moyennes"),
-        ("moyennes\\blanches2",  74,     "moyennes"),
-        ('moyennes\\noirs',      74,     "moyennes"),
-        ("moyennes\\noirs2",     74,     "moyennes"),
-        ("petites\\blanches",    74,     "petites"),
-        ("petites\\blanches2",   74,     "petites"),
-        ("petites\\noirs",       36,     "petites"),
-        ("petites\\noirs2",      36,     "petites")
+        ("grosses\\blanches",    5,     "grosses"),
+        ("grosses\\blanches2",   5,     "grosses"),
+        ("moyennes\\blanches",   5,     "moyennes"),
+        ("moyennes\\blanches2",  5,     "moyennes"),
+        ("petites\\blanches",    5,     "petites"),
+        ("petites\\blanches2",   5,     "petites")
+        ]
+    [
+        ("grosses\\noirs",       5,     "grosses"),
+        ("grosses\\noirs2",      5,     "grosses"),
+        ('moyennes\\noirs',      5,     "moyennes"),
+        ("moyennes\\noirs2",     5,     "moyennes"),
+        ("petites\\noirs",       5,     "petites"),
+        ("petites\\noirs2",      5,     "petites")
         ]"""
     
-    nb_epochs : int = 20
-    model_name : str = "ternaire"
+    nb_epochs : int = 100
+    model_name : str = "ternaire_b"
 
     # - run -
     rn_train.run(repertoires, nb_epochs, model_name)
