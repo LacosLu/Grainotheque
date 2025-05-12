@@ -140,5 +140,5 @@ if __name__ == "__main__":
 
     # -- Test --
     #chemin : str = ".\\temp\\test_petites_blanches.jpeg"
-    chemin : str = ".\\data\\petites\\blanches\\1.jpg"
+    chemin : str = ".\\data\\grosses\\blanches\\1.jpg"
     print(rn_train.evaluate(chemin))
