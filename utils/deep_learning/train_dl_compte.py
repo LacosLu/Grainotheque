@@ -100,6 +100,34 @@ if __name__ == "__main__":
         ("grosses\\blanches",    74),
         ("grosses\\blanches2",   74)
         ]
+    
+    """Répertoires possibles :
+    [
+        ("grosses\\noirs",    74),
+        ("grosses\\noirs2",   74)
+        ]
+    [
+        ("grosses\\blanches",    74),
+        ("grosses\\blanches2",   74)
+        ]
+    [
+        ("moyennes\\noirs",    74),
+        ("moyennes\\noirs2",   74)
+        ]
+    [
+        ("moyennes\\blanches",    74),
+        ("moyennes\\blanches2",   74)
+        ]
+    [
+        ("petites\\noirs",    36),
+        ("petites\\noirs2",   36)
+        ]
+    [
+        ("petites\\blanches",    74),
+        ("petites\\blanches2",   74)
+        ]
+    """
+
     nb_epochs : int = 20
     model_name : str = "compte_grosses_blanches"
 

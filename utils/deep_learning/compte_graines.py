@@ -22,6 +22,9 @@ class CompterGraines:
     __chemin_photo_taille : str = "/home/pi/Documents/Grainotheque/AppGrainotheque/utils/temp/img_taille.jpg"
     __repertoires_rns : list[list[tuple[str,int,str]]] = [
         [
+            ("ternaire/blanches/grosses",    10),
+            ("ternaire/blanches/moyennes",   10),
+            ("ternaire/blanches/petites",    10),
             ("grosses/blanches",    74),
             ("grosses/blanches2",   74),
             ("moyennes/blanches",   74),
@@ -30,6 +33,9 @@ class CompterGraines:
             ("petites/blanches2",   74)
         ],
         [
+            ("ternaire/noirs/grosses",    10),
+            ("ternaire/noirs/moyennes",   10),
+            ("ternaire/noirs/petites",    10),
             ("grosses/noirs",       74),
             ("grosses/noirs2",      74),
             ('moyennes/noirs',      74),
