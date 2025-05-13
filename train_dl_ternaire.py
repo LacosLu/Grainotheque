@@ -102,43 +102,55 @@ class TrainDLTernaire(TrainDL):
 # ----- PROGRAMME -----
 if __name__ == "__main__":
     # -- Initialisation des éléments --
-    rn_train = TrainDLTernaire("ternaire_b.pt")
+    rn_train = TrainDLTernaire()
 
     # -- Lancement --
     # - Paramètres -
     repertoires : list[tuple[str,int,str]] = [
-        ("grosses\\blanches",    5,     "grosses"),
-        ("grosses\\blanches2",   5,     "grosses"),
-        ("moyennes\\blanches",   5,     "moyennes"),
-        ("moyennes\\blanches2",  5,     "moyennes"),
-        ("petites\\blanches",    5,     "petites"),
-        ("petites\\blanches2",   5,     "petites")
-        ]
-    
-    """[
-        ("grosses\\blanches",    5,     "grosses"),
-        ("grosses\\blanches2",   5,     "grosses"),
-        ("moyennes\\blanches",   5,     "moyennes"),
-        ("moyennes\\blanches2",  5,     "moyennes"),
-        ("petites\\blanches",    5,     "petites"),
-        ("petites\\blanches2",   5,     "petites")
-        ]
-    [
+        ("ternaire\\noirs\\grosses",    10,     "grosses"),
+        ("ternaire\\noirs\\moyennes",   10,     "moyennes"),
+        ("ternaire\\noirs\\petites",    10,     "petites"),
         ("grosses\\noirs",       5,     "grosses"),
         ("grosses\\noirs2",      5,     "grosses"),
         ('moyennes\\noirs',      5,     "moyennes"),
         ("moyennes\\noirs2",     5,     "moyennes"),
         ("petites\\noirs",       5,     "petites"),
         ("petites\\noirs2",      5,     "petites")
-        ]"""
+        ]
+    
+    """Répertoires possibles :
+    [
+        ("ternaire\\blanches\\grosses",    10,     "grosses"),
+        ("ternaire\\blanches\\moyennes",   10,     "moyennes"),
+        ("ternaire\\blanches\\petites",    10,     "petites"),
+        ("grosses\\blanches",               5,     "grosses"),
+        ("grosses\\blanches2",              5,     "grosses"),
+        ("moyennes\\blanches",              5,     "moyennes"),
+        ("moyennes\\blanches2",             5,     "moyennes"),
+        ("petites\\blanches",               5,     "petites"),
+        ("petites\\blanches2",              5,     "petites")
+        ]
+
+    [
+        ("ternaire\\noirs\\grosses",    10,     "grosses"),
+        ("ternaire\\noirs\\moyennes",   10,     "moyennes"),
+        ("ternaire\\noirs\\petites",    10,     "petites"),
+        ("grosses\\noirs",       5,     "grosses"),
+        ("grosses\\noirs2",      5,     "grosses"),
+        ('moyennes\\noirs',      5,     "moyennes"),
+        ("moyennes\\noirs2",     5,     "moyennes"),
+        ("petites\\noirs",       5,     "petites"),
+        ("petites\\noirs2",      5,     "petites")
+        ]
+    """
     
     nb_epochs : int = 100
-    model_name : str = "ternaire_b"
+    model_name : str = "ternaire_n"
 
     # - run -
     rn_train.run(repertoires, nb_epochs, model_name)
 
     # -- Test --
-    #chemin : str = ".\\temp\\test_petites_blanches.jpeg"
-    chemin : str = ".\\data\\grosses\\blanches\\1.jpg"
+    chemin : str = ".\\temp\\test_grosses_noirs_taille.jpeg"
+    #chemin : str = ".\\data\\grosses\\blanches\\1.jpg"
     print(rn_train.evaluate(chemin))

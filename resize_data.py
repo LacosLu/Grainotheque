@@ -18,7 +18,13 @@ repertoires : list[tuple[str,int,str]] = [
     ("petites\\blanches",    74),
     ("petites\\blanches2",   74),
     ("petites\\noirs",       36),
-    ("petites\\noirs2",      36)
+    ("petites\\noirs2",      36),
+    ("ternaire\\noirs\\grosses",    10),
+    ("ternaire\\noirs\\moyennes",   10),
+    ("ternaire\\noirs\\petites",    10),
+    ("ternaire\\blanches\\grosses",    10),
+    ("ternaire\\blanches\\moyennes",   10),
+    ("ternaire\\blanches\\petites",    10)
     ]
 
 # ----- FONCTIONS -----

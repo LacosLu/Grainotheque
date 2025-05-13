@@ -92,21 +92,49 @@ class TrainDLCompte(TrainDL):
 # ----- PROGRAMME -----
 if __name__ == "__main__":
     # -- Initialisation des éléments --
-    rn_train = TrainDLCompte("compte_moyennes_blanches.pt")
+    rn_train = TrainDLCompte()
 
     # -- Lancement --
     # - Paramètres -
     repertoires : list[tuple[str,int]] = [
+        ("grosses\\blanches",    74),
+        ("grosses\\blanches2",   74)
+        ]
+    
+    """Répertoires possibles :
+    [
+        ("grosses\\noirs",    74),
+        ("grosses\\noirs2",   74)
+        ]
+    [
+        ("grosses\\blanches",    74),
+        ("grosses\\blanches2",   74)
+        ]
+    [
+        ("moyennes\\noirs",    74),
+        ("moyennes\\noirs2",   74)
+        ]
+    [
         ("moyennes\\blanches",    74),
         ("moyennes\\blanches2",   74)
         ]
-    nb_epochs : int = 500
-    model_name : str = "compte_moyennes_blanches"
+    [
+        ("petites\\noirs",    36),
+        ("petites\\noirs2",   36)
+        ]
+    [
+        ("petites\\blanches",    74),
+        ("petites\\blanches2",   74)
+        ]
+    """
+
+    nb_epochs : int = 5_000
+    model_name : str = "compte_grosses_blanches"
 
     # - run -
     rn_train.run(repertoires, nb_epochs, model_name)
 
     # -- Test --
-    chemin : str = ".\\temp\\test_moyennes_blanches.jpeg"
+    chemin : str = ".\\temp\\test_grosses_blanches.jpeg"
     #chemin :str = ".\\data\\grosses\\blanches\\20.jpg"
     print(rn_train.evaluate(chemin)+1)
