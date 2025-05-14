@@ -143,9 +143,11 @@ class CompterGraines:
 
     def compter_graines(self):
         nb_binaire : int = int(self.__binaire.evaluate(CompterGraines.__chemin_photo_compte))
+        print(nb_binaire)
         match nb_binaire:
             case 0:
                 nb_ternaire_b : int = int(self.__ternaire_b.evaluate(CompterGraines.__chemin_photo_taille))
+                print(nb_ternaire_b)
                 match nb_ternaire_b:
                     case 0:
                         nb_graines_par_sachet : int = 20
@@ -158,6 +160,7 @@ class CompterGraines:
                         nb_graines : int = int(self.__compte_pb.evaluate(CompterGraines.__chemin_photo_compte)) + 1
             case 1:
                 nb_ternaire_n : int = int(self.__ternaire_n.evaluate(CompterGraines.__chemin_photo_taille))
+                print(nb_ternaire_n)
                 match nb_ternaire_n:
                     case 0:
                         nb_graines_par_sachet : int = 20

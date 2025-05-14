@@ -92,13 +92,15 @@ class TrainDLCompte(TrainDL):
 # ----- PROGRAMME -----
 if __name__ == "__main__":
     # -- Initialisation des éléments --
-    rn_train = TrainDLCompte()
+    rn_train = TrainDLCompte("compte_grosses_blanches.pt")
 
     # -- Lancement --
     # - Paramètres -
     repertoires : list[tuple[str,int]] = [
         ("grosses\\blanches",    74),
-        ("grosses\\blanches2",   74)
+        ("grosses\\blanches2",   74),
+        ("grosses\\blanches3",   74),
+        ("grosses\\blanches4",   74)
         ]
     
     """Répertoires possibles :
@@ -108,7 +110,9 @@ if __name__ == "__main__":
         ]
     [
         ("grosses\\blanches",    74),
-        ("grosses\\blanches2",   74)
+        ("grosses\\blanches2",   74),
+        ("grosses\\blanches3",   74),
+        ("grosses\\blanches4",   74)
         ]
     [
         ("moyennes\\noirs",    74),
@@ -128,7 +132,7 @@ if __name__ == "__main__":
         ]
     """
 
-    nb_epochs : int = 5_000
+    nb_epochs : int = 1_000
     model_name : str = "compte_grosses_blanches"
 
     # - run -
