@@ -110,12 +110,18 @@ if __name__ == "__main__":
         ("ternaire\\noirs\\grosses",    10,     "grosses"),
         ("ternaire\\noirs\\moyennes",   10,     "moyennes"),
         ("ternaire\\noirs\\petites",    10,     "petites"),
-        ("grosses\\noirs",       5,     "grosses"),
-        ("grosses\\noirs2",      5,     "grosses"),
-        ('moyennes\\noirs',      5,     "moyennes"),
-        ("moyennes\\noirs2",     5,     "moyennes"),
-        ("petites\\noirs",       5,     "petites"),
-        ("petites\\noirs2",      5,     "petites")
+        ("grosses\\noirs",       1,     "grosses"),
+        ("grosses\\noirs2",      1,     "grosses"),
+        ("grosses\\noirs3",      1,     "grosses"),
+        ("grosses\\noirs4",      1,     "grosses"),
+        ('moyennes\\noirs',      1,     "moyennes"),
+        ("moyennes\\noirs2",     1,     "moyennes"),
+        ('moyennes\\noirs3',     1,     "moyennes"),
+        ("moyennes\\noirs4",     1,     "moyennes"),
+        ("petites\\noirs",       1,     "petites"),
+        ("petites\\noirs2",      1,     "petites"),
+        ("petites\\noirs3",      1,     "petites"),
+        ("petites\\noirs4",      1,     "petites")
         ]
     
     """Répertoires possibles :
@@ -123,24 +129,36 @@ if __name__ == "__main__":
         ("ternaire\\blanches\\grosses",    10,     "grosses"),
         ("ternaire\\blanches\\moyennes",   10,     "moyennes"),
         ("ternaire\\blanches\\petites",    10,     "petites"),
-        ("grosses\\blanches",               5,     "grosses"),
-        ("grosses\\blanches2",              5,     "grosses"),
-        ("moyennes\\blanches",              5,     "moyennes"),
-        ("moyennes\\blanches2",             5,     "moyennes"),
-        ("petites\\blanches",               5,     "petites"),
-        ("petites\\blanches2",              5,     "petites")
+        ("grosses\\blanches",               1,     "grosses"),
+        ("grosses\\blanches2",              1,     "grosses"),
+        ("grosses\\blanches3",              1,     "grosses"),
+        ("grosses\\blanches4",              1,     "grosses"),
+        ("moyennes\\blanches",              1,     "moyennes"),
+        ("moyennes\\blanches2",             1,     "moyennes"),
+        ("moyennes\\blanches3",             1,     "moyennes"),
+        ("moyennes\\blanches4",             1,     "moyennes"),
+        ("petites\\blanches",               1,     "petites"),
+        ("petites\\blanches2",              1,     "petites"),
+        ("petites\\blanches3",              1,     "petites"),
+        ("petites\\blanches4",              1,     "petites")
         ]
 
     [
         ("ternaire\\noirs\\grosses",    10,     "grosses"),
         ("ternaire\\noirs\\moyennes",   10,     "moyennes"),
         ("ternaire\\noirs\\petites",    10,     "petites"),
-        ("grosses\\noirs",       5,     "grosses"),
-        ("grosses\\noirs2",      5,     "grosses"),
-        ('moyennes\\noirs',      5,     "moyennes"),
-        ("moyennes\\noirs2",     5,     "moyennes"),
-        ("petites\\noirs",       5,     "petites"),
-        ("petites\\noirs2",      5,     "petites")
+        ("grosses\\noirs",       1,     "grosses"),
+        ("grosses\\noirs2",      1,     "grosses"),
+        ("grosses\\noirs3",      1,     "grosses"),
+        ("grosses\\noirs4",      1,     "grosses"),
+        ('moyennes\\noirs',      1,     "moyennes"),
+        ("moyennes\\noirs2",     1,     "moyennes"),
+        ('moyennes\\noirs3',     1,     "moyennes"),
+        ("moyennes\\noirs4",     1,     "moyennes"),
+        ("petites\\noirs",       1,     "petites"),
+        ("petites\\noirs2",      1,     "petites"),
+        ("petites\\noirs3",      1,     "petites"),
+        ("petites\\noirs4",      1,     "petites")
         ]
     """
     

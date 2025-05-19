@@ -102,23 +102,35 @@ class TrainDLBinaire(TrainDL):
 # ----- PROGRAMME -----
 if __name__ == "__main__":
     # -- Initialisation des éléments --
-    rn_train = TrainDLBinaire("binaire.pt")
+    rn_train = TrainDLBinaire()
 
     # -- Lancement --
     # - Paramètres -
     repertoires : list[tuple[str,int,str]] = [
         ("grosses\\blanches",    74,     "blanches"),
         ("grosses\\blanches2",   74,     "blanches"),
+        ("grosses\\blanches3",   74,     "blanches"),
+        ("grosses\\blanches4",   74,     "blanches"),
         ("grosses\\noirs",       74,     "noirs"),
         ("grosses\\noirs2",      74,     "noirs"),
+        ("grosses\\noirs3",      74,     "noirs"),
+        ("grosses\\noirs4",      74,     "noirs"),
         ("moyennes\\blanches",   74,     "blanches"),
         ("moyennes\\blanches2",  74,     "blanches"),
+        ("moyennes\\blanches3",  74,     "blanches"),
+        ("moyennes\\blanches4",  74,     "blanches"),
         ('moyennes\\noirs',      74,     "noirs"),
         ("moyennes\\noirs2",     74,     "noirs"),
+        ('moyennes\\noirs3',     74,     "noirs"),
+        ("moyennes\\noirs4",     74,     "noirs"),
         ("petites\\blanches",    74,     "blanches"),
         ("petites\\blanches2",   74,     "blanches"),
+        ("petites\\blanches3",   74,     "blanches"),
+        ("petites\\blanches4",   74,     "blanches"),
         ("petites\\noirs",       36,     "noirs"),
-        ("petites\\noirs2",      36,     "noirs")
+        ("petites\\noirs2",      36,     "noirs"),
+        ("petites\\noirs3",      32,     "noirs"),
+        ("petites\\noirs4",      33,     "noirs")
         ]
     nb_epochs : int = 100
     model_name : str = "binaire"

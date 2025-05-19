@@ -131,8 +131,8 @@ if __name__ == "__main__":
     [
         ("petites\\noirs",    36),
         ("petites\\noirs2",   36),
-        ("petites\\noirs3",   36),
-        ("petites\\noirs4",   36)
+        ("petites\\noirs3",   32),
+        ("petites\\noirs4",   33)
         ]
     [
         ("petites\\blanches",    74),
@@ -141,8 +141,8 @@ if __name__ == "__main__":
         ("petites\\blanches4",   74)
         ]
     """
-
-    nb_epochs : int = 1_000
+    
+    nb_epochs : int = 500
     model_name : str = "compte_moyennes_blanches"
 
     # - run -
