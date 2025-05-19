@@ -106,7 +106,9 @@ if __name__ == "__main__":
     """Répertoires possibles :
     [
         ("grosses\\noirs",    74),
-        ("grosses\\noirs2",   74)
+        ("grosses\\noirs2",   74),
+        ("grosses\\noirs3",   74),
+        ("grosses\\noirs4",   74)
         ]
     [
         ("grosses\\blanches",    74),

@@ -98,17 +98,23 @@ if __name__ == "__main__":
     # - Paramètres -
     repertoires : list[tuple[str,int]] = [
         ("grosses\\noirs",    74),
-        ("grosses\\noirs2",   74)
+        ("grosses\\noirs2",   74),
+        ("grosses\\noirs3",   74),
+        ("grosses\\noirs4",   74)
         ]
     
     """Répertoires possibles :
     [
         ("grosses\\noirs",    74),
-        ("grosses\\noirs2",   74)
+        ("grosses\\noirs2",   74),
+        ("grosses\\noirs3",   74),
+        ("grosses\\noirs4",   74)
         ]
     [
         ("grosses\\blanches",    74),
-        ("grosses\\blanches2",   74)
+        ("grosses\\blanches2",   74),
+        ("grosses\\blanches3",   74),
+        ("grosses\\blanches4",   74)
         ]
     [
         ("moyennes\\noirs",    74),
