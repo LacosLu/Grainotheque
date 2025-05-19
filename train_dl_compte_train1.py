@@ -118,23 +118,31 @@ if __name__ == "__main__":
         ]
     [
         ("moyennes\\noirs",    74),
-        ("moyennes\\noirs2",   74)
+        ("moyennes\\noirs2",   74),
+        ("moyennes\\noirs3",   74),
+        ("moyennes\\noirs4",   74)
         ]
     [
         ("moyennes\\blanches",    74),
-        ("moyennes\\blanches2",   74)
+        ("moyennes\\blanches2",   74),
+        ("moyennes\\blanches3",   74),
+        ("moyennes\\blanches4",   74)
         ]
     [
         ("petites\\noirs",    36),
-        ("petites\\noirs2",   36)
+        ("petites\\noirs2",   36),
+        ("petites\\noirs3",   36),
+        ("petites\\noirs4",   36)
         ]
     [
         ("petites\\blanches",    74),
-        ("petites\\blanches2",   74)
+        ("petites\\blanches2",   74),
+        ("petites\\blanches3",   74),
+        ("petites\\blanches4",   74)
         ]
     """
 
-    nb_epochs : int = 1_000
+    nb_epochs : int = 500
     model_name : str = "compte_grosses_blanches"
 
     # - run -

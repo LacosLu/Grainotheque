@@ -97,10 +97,10 @@ if __name__ == "__main__":
     # -- Lancement --
     # - Paramètres -
     repertoires : list[tuple[str,int]] = [
-        ("grosses\\noirs",    74),
-        ("grosses\\noirs2",   74),
-        ("grosses\\noirs3",   74),
-        ("grosses\\noirs4",   74)
+        ("petites\\blanches",    74),
+        ("petites\\blanches2",   74),
+        ("petites\\blanches3",   74),
+        ("petites\\blanches4",   74)
         ]
     
     """Répertoires possibles :
