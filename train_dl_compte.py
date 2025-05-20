@@ -149,6 +149,6 @@ if __name__ == "__main__":
     rn_train.run(repertoires, nb_epochs, model_name)
 
     # -- Test --
-    chemin : str = ".\\temp\\test_grosses_noirs.jpeg"
+    chemin : str = ".\\temp\\test_grosses_noirs.jpeg" #6
     #chemin :str = ".\\data\\grosses\\blanches\\20.jpg"
     print(rn_train.evaluate(chemin)+1)
