@@ -142,7 +142,7 @@ if __name__ == "__main__":
         ]
     """
 
-    nb_epochs : int = 1_000
+    nb_epochs : int = 500
     model_name : str = "compte_grosses_blanches"
 
     # - run -
