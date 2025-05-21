@@ -92,7 +92,7 @@ class TrainDLCompte(TrainDL):
 # ----- PROGRAMME -----
 if __name__ == "__main__":
     # -- Initialisation des éléments --
-    rn_train = TrainDLCompte()
+    rn_train = TrainDLCompte("compte_petites_noirs.pt")
 
     # -- Lancement --
     # - Paramètres -
