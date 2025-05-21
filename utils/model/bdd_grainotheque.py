@@ -48,7 +48,7 @@ class BDDGrainotheque:
         except:
             print("Pas de connexion")
         
-    def recuperer_graine(self, informations : dict[str,str|int]) -> int|None:
+    def recuperer_graine(self, informations : dict[str,str|int]) -> dict:
         """Récupère la quantité de graines par sachet d'une graine dans la base de données"""
         try:
             requete : str ="""
