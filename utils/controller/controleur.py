@@ -188,7 +188,13 @@ class ControleurGrainotheque:
             self.__alert._bouttons["annulation"].configure(command=self.__alert.fermer)
 
         # -- Récupération des informations du QR code --
-        self.__informations = self.__app_qr._qr.lecture_qrcode()
+        try:
+            self.__informations = self.__app_qr._qr.lecture_qrcode()
+        except:
+            self.__alert : Alert = Alert("Erreur de lecture de QR code. \n Veuillez réessayer")
+
+            self.__alert._bouttons["validation"].configure(command=self.__alert.fermer)
+            self.__alert._bouttons["annulation"].configure(command=self.__alert.fermer)
 
         # --- Requête pour récupérer les informations supplémentaires ---
         info_graines : dict = self.__bdd.recuperer_graine(self.__informations)
