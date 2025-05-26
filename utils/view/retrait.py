@@ -123,6 +123,17 @@ class Retrait(Base):
         validation.grid(column=0, columnspan=2, row=8, padx=5, pady=5)
         self._bouttons["validation"] = validation
 
+        # Boutton d'annulation
+        annulation : ctk.CTkButton = ctk.CTkButton(self._canva,
+                                                   text="Annuler",
+                                                   width=self._largeur_items,
+                                                   height=self._hauteur_items,
+                                                   font=self._font,
+                                                   fg_color="red",
+                                                   hover_color="darkred")
+        annulation.grid(column=0, columnspan=2, row=9, padx=5, pady=5)
+        self._bouttons["annulation"] = annulation
+
         # Champ des observations
         if "observations" in infos.keys():
             text : str = infos["observations"]

@@ -206,6 +206,7 @@ class ControleurGrainotheque:
 
         # --- Bouttons de la vue ---
         self.__retrait._bouttons["validation"].configure(command=self.__validation_retrait)
+        self.__retrait._bouttons["annulation"].configure(command=self.__retrait.fermer)
 
         # --- Lancement de la vue ---
         self.__retrait.run()
