@@ -74,7 +74,13 @@ class ControleurGrainotheque:
         self.__informations["quantite_par_sachet"] = self.__depot._quantite_par_sachet.cget("text")
 
         # --- Création du QR ---
-        self.__qrcode : str = self.__app_qr._qr.creation_qrcode(self.__informations)
+        try:
+            self.__qrcode : str = self.__app_qr._qr.creation_qrcode(self.__informations)
+        except:
+            self.__alert : Alert = Alert("Erreur de création du QR code. \n Veuillez réessayer")
+
+            self.__alert._bouttons["validation"].configure(command=self.__alert.fermer)
+            self.__alert._bouttons["annulation"].configure(command=self.__alert.fermer)
 
         # --- Génération de la page ---
         self.__qr : QR = QR()
@@ -118,9 +124,15 @@ class ControleurGrainotheque:
         self.__bdd.ajouter_depot(self.__informations)
 
         # --- Fin de fonction ---
-        self.__app_qr._imprimante.impretion_qrcode(self.__qrcode)
-        self.__qr.fermer()
-        self.__depot.fermer()
+        try:
+            self.__app_qr._imprimante.impretion_qrcode(self.__qrcode)
+            self.__qr.fermer()
+            self.__depot.fermer()
+        except:
+            self.__alert : Alert = Alert("Erreur d'impression du QR code. \n Veuillez réessayer")
+
+            self.__alert._bouttons["validation"].configure(command=self.__alert.fermer)
+            self.__alert._bouttons["annulation"].configure(command=self.__alert.fermer)
 
     def __association_comptage_vue(self) -> None:
         """Méthode qui va faire le lien entre le compte de graines dans le modèle et le renvoie du résultat dans la vue"""
@@ -131,25 +143,37 @@ class ControleurGrainotheque:
 
     def __prendre_photo_taille(self) -> None:
         """Prend une photo, l'enregistre sous le nom de img_taille et continuer la procédure de comptage"""
-        Camera.photographier("img_taille")
+        try:
+            Camera.photographier("img_taille")
 
-        self.__alert.fermer()
+            self.__alert.fermer()
 
-        self.__alert = Alert("Déposez le reste des graines à plat")
+            self.__alert = Alert("Déposez le reste des graines à plat")
 
-        self.__alert._bouttons["validation"].configure(command=self.__prendre_photo_compter_graines)
-        self.__alert._bouttons["annulation"].configure(command=self.__alert.fermer)
+            self.__alert._bouttons["validation"].configure(command=self.__prendre_photo_compter_graines)
+            self.__alert._bouttons["annulation"].configure(command=self.__alert.fermer)
+        except:
+            self.__alert : Alert = Alert("Erreur de prise de photo. \n Veuillez réessayer")
+
+            self.__alert._bouttons["validation"].configure(command=self.__alert.fermer)
+            self.__alert._bouttons["annulation"].configure(command=self.__alert.fermer)
 
     def __prendre_photo_compter_graines(self) -> None:
         """Prend la photo de toutes les graines et les comptes"""
-        Camera.photographier()
+        try:
+            Camera.photographier()
 
-        self.__alert.fermer()
+            self.__alert.fermer()
 
-        nb_graines_par_sachet, compte_graines = self.__comptage.compter_graines()
+            nb_graines_par_sachet, compte_graines = self.__comptage.compter_graines()
 
-        self.__depot._nb_graines.configure(text=compte_graines)
-        self.__depot._quantite_par_sachet.configure(text=nb_graines_par_sachet)
+            self.__depot._nb_graines.configure(text=compte_graines)
+            self.__depot._quantite_par_sachet.configure(text=nb_graines_par_sachet)
+        except:
+            self.__alert : Alert = Alert("Erreur de prise de photo. \n Veuillez réessayer")
+
+            self.__alert._bouttons["validation"].configure(command=self.__alert.fermer)
+            self.__alert._bouttons["annulation"].configure(command=self.__alert.fermer)
 
     def __scan(self) -> None:
         """Scan du QR code mis sous la caméra"""
@@ -158,7 +182,10 @@ class ControleurGrainotheque:
         try:
             Camera.photographier("qr")
         except:
-            print("Pas de caméra")
+            self.__alert : Alert = Alert("Erreur de prise de photo. \n Veuillez réessayer")
+
+            self.__alert._bouttons["validation"].configure(command=self.__alert.fermer)
+            self.__alert._bouttons["annulation"].configure(command=self.__alert.fermer)
 
         # -- Récupération des informations du QR code --
         self.__informations = self.__app_qr._qr.lecture_qrcode()
