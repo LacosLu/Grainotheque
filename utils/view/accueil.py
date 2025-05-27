@@ -19,14 +19,14 @@ class Accueil(Base):
     def _initialiser_champs(self) -> None:
         """Initialise les champs de la page"""
         # Entrée pour la famille
-        famille = ctk.CTkEntry(self._canva,
-                               placeholder_text='Famille',
-                               width=self._largeur_items,
-                               font=self._font,
-                               height=self._hauteur_items)
-        famille.pack(padx=50, pady=5)
-        famille.bind("<1>", lambda event: Base.ouvrir_clavier(event, famille))
-        self._champs_entrees['famille'] = famille
+        self._famille = ctk.CTkComboBox(self._canva,
+                                  width=self._largeur_items,
+                                  font=self._font,
+                                  dropdown_font=self._font,
+                                  height=self._hauteur_items,
+                                  values=["Fruits", "Légumes", "Plantes Aromatisées"])
+        self._famille.pack(padx=50, pady=5)
+        self._famille.set("Légumes")
 
         # Entrée pour l'espèce
         espece = ctk.CTkEntry(self._canva,

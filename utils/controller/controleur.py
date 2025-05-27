@@ -37,6 +37,7 @@ class ControleurGrainotheque:
     def __recherche(self) -> None:
         """Recherche de la graine dans la base de données"""
         # --- Récupération des champs qui serviront pour la requête ---
+        self.__informations["famille"] = self.__accueil._famille.get()
         for key, object in self.__accueil._champs_entrees.items():
             self.__informations[key] = object.get().capitalize()
 
