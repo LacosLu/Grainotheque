@@ -27,11 +27,11 @@ class ApplicationQR:
 
     # lance les fonctions en leurs donnent les données nécessaire
     def run(self):
-        # image = self._qr.creation_qrcode(self.__donnee) # appelle la fonction creation_qrcode de la classe Qrcode
+        image = self._qr.creation_qrcode(self.__donnee) # appelle la fonction creation_qrcode de la classe Qrcode
         # self._imprimante.impretion_qrcode(image) # appelle la fonction impretion_qrcode de la classe Imprimante
         # os.remove(image) # suprime l'image
-        dictionnaire = self._qr.lecture_qrcode() # appelle la fonction lecture_qrcode de la classe Retrait
-        print(dictionnaire)
+        # dictionnaire = self._qr.lecture_qrcode() # appelle la fonction lecture_qrcode de la classe Retrait
+        # print(dictionnaire)
         #self._retrait.mise_à_jour_bdd(dictionnaire) # appelle la fonction mise_à_jour_bdd de la classe Retrait
     
 

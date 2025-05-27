@@ -21,10 +21,10 @@ class test_Qrcode_grainotheque(TestCase):
         """ Test de la création d'un Qr code  """
         nom_image_cree = 'qr.png'
         donnee : dict = {"famille": "Solanacées", "espece": "Tomate", "variete": "Grappe","date_recolte":"01.01.2025","quantite_par_sachet" : "20"}
-        fichier_image = f'{self.__config_qrcode['chemin_image']}/{nom_image_cree}'
+        fichier_image = f"{self.__config_qrcode['chemin_image']}/{nom_image_cree}"
         self.assertFalse(os.path.exists(fichier_image))
-        image = self.__qr.creation_qrcode(donnee,nom_image_cree)
-        self.assertEqual(f'{self.__config_qrcode['chemin_image']}/{nom_image_cree}',image)
+        image = self.__qr.creation_qrcode(donnee)
+        self.assertEqual(f"{self.__config_qrcode['chemin_image']}/{nom_image_cree}",image)
         self.assertTrue(os.path.exists(fichier_image))
         os.remove(image)
         self.assertFalse(os.path.exists(fichier_image))
@@ -38,9 +38,9 @@ class test_Qrcode_grainotheque(TestCase):
         dictionnaire_voulu :  dict = {'famille': 'Solanacées', 'espece': 'Tomate', 'variete': 'Grappe', 'date_recolte': '01.01.2025', 'quantite_par_sachet': '20', 'url_aide': ''}
         fichier_image = f"{self.__chemin_image}/{nom_image_lu}"
         self.assertTrue(os.path.exists(fichier_image))
-        dictionnaire = self.__qr.lecture_qrcode(nom_image_lu)
+        dictionnaire = self.__qr.lecture_qrcode()
         self.assertEqual(dictionnaire,dictionnaire_voulu)
-       
+        self.assertEqual(1,1)
 
 
 
@@ -57,9 +57,7 @@ class test_Qrcode_grainotheque(TestCase):
         
             
 
-
-
-if __name__ == '__main__':
-    main(verbosity=2)
+# if __name__ == '__main__':
+#     main(verbosity=2)
 
    
