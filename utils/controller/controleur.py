@@ -11,6 +11,10 @@ from ..deep_learning import *
 
 # ----- CLASSES -----
 class ControleurGrainotheque:
+    # --- Constantes ---
+    AT_CHIFFRES : list[str] = ["@","1","2","3","4","5","6","7","8","9"]
+    REGEX : str = "^[\w\.]+@([\w-]+\.)+[\w-]{2,4}$"
+
     def __init__(self, nom_grainotheque : str = "Centre Social et Socioculturel du Chemillois") -> None:
         """Contrôleur de l'application pour la station d'identification"""
         # --- Attributs ---
@@ -42,12 +46,13 @@ class ControleurGrainotheque:
         self.__informations["famille"] = self.__accueil._famille.get()
         for key, object in self.__accueil._champs_entrees.items():
             self.__informations[key] = object.get().capitalize()
-            if "@" in self.__informations[key]:
-                self.__alert : Alert = Alert(f"Erreur de saisie : {key}. \n Veuillez réessayer")
+            for carac in ControleurGrainotheque.AT_CHIFFRES:
+                if carac in self.__informations[key]:
+                    self.__alert : Alert = Alert(f"Erreur de saisie : {key}. \n Veuillez réessayer")
 
-                self.__alert._bouttons["validation"].configure(command=self.__alert.fermer)
-                self.__alert._bouttons["annulation"].configure(command=self.__alert.fermer)
-                return
+                    self.__alert._bouttons["validation"].configure(command=self.__alert.fermer)
+                    self.__alert._bouttons["annulation"].configure(command=self.__alert.fermer)
+                    return
 
         # --- Besoin de réaliser la requête dans le modèle ---
         if self.__bdd.recherche_graine(self.__informations) :
@@ -71,10 +76,6 @@ class ControleurGrainotheque:
 
     def __validation_depot(self) -> None:
         """Fonction de validation du dépôt"""
-        # --- Constantes ---
-        PRENOM : list[str] = ["@","1","2","3","4","5","6","7","8","9"]
-        REGEX : str = "^[\w\.]+@([\w-]+\.)+[\w-]{2,4}$"
-
         # --- Récupération des entrées ---
         for key, object in self.__depot._champs_entrees.items():
             if key == "observations":
@@ -82,7 +83,7 @@ class ControleurGrainotheque:
             else:
                 self.__informations[key] = object.get()
         
-        for carac in PRENOM:
+        for carac in ControleurGrainotheque.AT_CHIFFRES:
             if carac in self.__informations["prenom_depositaire"]:
                 self.__alert : Alert = Alert("Erreur sur le prénom. \n Veuillez réessayer")
 
@@ -90,7 +91,7 @@ class ControleurGrainotheque:
                 self.__alert._bouttons["annulation"].configure(command=self.__alert.fermer)
                 return
 
-        if not re.search(REGEX, self.__informations["email_depositaire"]):
+        if not re.search(ControleurGrainotheque.REGEX, self.__informations["email_depositaire"]):
             self.__alert : Alert = Alert("Erreur sur le mail. \n Veuillez réessayer")
 
             self.__alert._bouttons["validation"].configure(command=self.__alert.fermer)
