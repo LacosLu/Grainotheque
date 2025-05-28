@@ -72,6 +72,17 @@ class Accueil(Base):
         scan.pack(padx=50, pady=5)
         self._bouttons["scan"] = scan
 
+        # Boutton de fermeture de l'accueil
+        fermer : ctk.CTkButton = ctk.CTkButton(self._canva,
+                                               text="Fermer",
+                                               fg_color="red",
+                                               hover_color="darkred",
+                                               width=self._largeur_items,
+                                               height=self._hauteur_items,
+                                               font=self._font)
+        fermer.pack(padx=50, pady=5)
+        self._bouttons["fermer"] = fermer
+
 # ----- PROGRAMME -----
 if __name__ == "__main__":
     Accueil().run()

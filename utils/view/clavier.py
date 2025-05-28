@@ -13,10 +13,10 @@ class Clavier:
         ['Space', '<--', 'Terminer']
     ]
 
-    __largeur_bouttons : int = 100
-    __hauteur_bouttons : int = 30
+    __largeur_bouttons : int = 150
+    __hauteur_bouttons : int = 50
 
-    __font : tuple = ("Baloo da 2", 20)
+    __font : tuple = ("Baloo da 2", 25)
 
     def __init__(self, entree : ctk.CTkEntry):
         """Fenêtre de clavier avec tkinter"""

@@ -2,6 +2,7 @@
 # --- Bibliothèques externes ---
 import customtkinter as ctk
 import datetime
+import re
 
 # --- Bibliothèques internes ---
 from ..view import *
@@ -30,6 +31,7 @@ class ControleurGrainotheque:
         # -- Bouttons de la vue d'accueil --
         self.__accueil._bouttons["recherche"].configure(command=self.__recherche)
         self.__accueil._bouttons["scan"].configure(command=self.__scan)
+        self.__accueil._bouttons["fermer"].configure(command=self.__accueil.fermer)
 
         # --- Lancement ---
         self.__accueil.run()
@@ -40,6 +42,12 @@ class ControleurGrainotheque:
         self.__informations["famille"] = self.__accueil._famille.get()
         for key, object in self.__accueil._champs_entrees.items():
             self.__informations[key] = object.get().capitalize()
+            if "@" in self.__informations[key]:
+                self.__alert : Alert = Alert(f"Erreur de saisie : {key}. \n Veuillez réessayer")
+
+                self.__alert._bouttons["validation"].configure(command=self.__alert.fermer)
+                self.__alert._bouttons["annulation"].configure(command=self.__alert.fermer)
+                return
 
         # --- Besoin de réaliser la requête dans le modèle ---
         if self.__bdd.recherche_graine(self.__informations) :
@@ -63,35 +71,62 @@ class ControleurGrainotheque:
 
     def __validation_depot(self) -> None:
         """Fonction de validation du dépôt"""
+        # --- Constantes ---
+        PRENOM : list[str] = ["@","1","2","3","4","5","6","7","8","9"]
+        REGEX : str = "^[\w\.]+@([\w-]+\.)+[\w-]{2,4}$"
+
         # --- Récupération des entrées ---
         for key, object in self.__depot._champs_entrees.items():
             if key == "observations":
                 self.__informations[key] = object.get("1.0", ctk.END)
             else:
                 self.__informations[key] = object.get()
-        self.__informations["prenom_depositaire"].capitalize()
-        self.__informations["date_recolte"] = datetime.datetime.strptime(self.__informations["date_recolte"], "%d/%m/%Y").date().strftime("%Y-%m-%d")
-        self.__informations["quantite_graine"] = int(self.__depot._nb_graines.cget("text"))
-        self.__informations["quantite_par_sachet"] = self.__depot._quantite_par_sachet.cget("text")
+        
+        for carac in PRENOM:
+            if carac in self.__informations["prenom_depositaire"]:
+                self.__alert : Alert = Alert("Erreur sur le prénom. \n Veuillez réessayer")
 
-        # --- Création du QR ---
-        try:
-            self.__qrcode : str = self.__app_qr._qr.creation_qrcode(self.__informations)
-        except:
-            self.__alert : Alert = Alert("Erreur de création du QR code. \n Veuillez réessayer")
+                self.__alert._bouttons["validation"].configure(command=self.__alert.fermer)
+                self.__alert._bouttons["annulation"].configure(command=self.__alert.fermer)
+                return
+
+        if not re.search(REGEX, self.__informations["email_depositaire"]):
+            self.__alert : Alert = Alert("Erreur sur le mail. \n Veuillez réessayer")
 
             self.__alert._bouttons["validation"].configure(command=self.__alert.fermer)
             self.__alert._bouttons["annulation"].configure(command=self.__alert.fermer)
+            return
 
-        # --- Génération de la page ---
-        self.__qr : QR = QR()
+        self.__informations["prenom_depositaire"].capitalize()
+        self.__informations["date_recolte"] = self.__depot._date_recolte.get_date()
+        self.__informations["quantite_par_sachet"] = self.__depot._quantite_par_sachet.cget("text")
 
-        # --- Bouttons de la vue ---
-        self.__qr._bouttons["impression"].configure(command=self.__imprimer_qr)
-        self.__qr._bouttons["annulation"].configure(command=self.__qr.fermer)
-        
-        # --- Lancement de la vue ---
-        self.__qr.run()
+        try:
+            self.__informations["quantite_graine"] = int(self.__depot._nb_graines.cget("text"))
+
+            # --- Création du QR ---
+            try:
+                self.__qrcode : str = self.__app_qr._qr.creation_qrcode(self.__informations)
+
+                # --- Génération de la page ---
+                self.__qr : QR = QR()
+
+                # --- Bouttons de la vue ---
+                self.__qr._bouttons["impression"].configure(command=self.__imprimer_qr)
+                self.__qr._bouttons["annulation"].configure(command=self.__qr.fermer)
+                
+                # --- Lancement de la vue ---
+                self.__qr.run()
+            except:
+                self.__alert : Alert = Alert("Erreur de création du QR code. \n Veuillez réessayer")
+
+                self.__alert._bouttons["validation"].configure(command=self.__alert.fermer)
+                self.__alert._bouttons["annulation"].configure(command=self.__alert.fermer)
+        except:
+            self.__alert : Alert = Alert("Calcul des graines non fait. \n Veuillez réessayer")
+
+            self.__alert._bouttons["validation"].configure(command=self.__alert.fermer)
+            self.__alert._bouttons["annulation"].configure(command=self.__alert.fermer)
 
     def __imprimer_qr(self) -> None:
         """Impression du qr code"""
@@ -169,7 +204,8 @@ class ControleurGrainotheque:
             nb_graines_par_sachet, compte_graines = self.__comptage.compter_graines()
 
             self.__depot._nb_graines.configure(text=compte_graines)
-            self.__depot._quantite_par_sachet.configure(text=nb_graines_par_sachet)
+            if self.__depot._quantite_par_sachet._text == "Nouvelle graine":
+                self.__depot._quantite_par_sachet.configure(text=nb_graines_par_sachet)
         except:
             self.__alert : Alert = Alert("Erreur de prise de photo. \n Veuillez réessayer")
 

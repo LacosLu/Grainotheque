@@ -1,6 +1,7 @@
 # ----- IMPORTS -----
 # --- Biblitohèques externes ---
 import customtkinter as ctk
+import tkcalendar as tkc
 import datetime
 
 # --- Bibliothèques internes ---
@@ -55,14 +56,16 @@ class Depot(Base):
         self._quantite_par_sachet.grid(column=0, row=3, padx=5, pady=5)
 
         # Date de récolte
-        date_recolte : ctk.CTkEntry = ctk.CTkEntry(self._canva,
-                                                   placeholder_text="Date de récolte",
-                                                   width=self._largeur_items,
-                                                   font=self._font,
-                                                   height=self._hauteur_items)
-        date_recolte.grid(column=1, row=0, padx=5, pady=5)
-        date_recolte.bind("<1>", lambda event: Base.ouvrir_clavier(event, date_recolte))
-        self._champs_entrees['date_recolte'] = date_recolte
+        self._date_recolte : tkc.DateEntry = tkc.DateEntry(self._canva,
+                                                     width=20,
+                                                     font=self._font,
+                                                     maxdate=datetime.datetime.today(),
+                                                     locale="fr",
+                                                     background="lightgrey",
+                                                     foreground="black",
+                                                     disabledbackground="lightgrey",
+                                                     disabledforeground="grey")
+        self._date_recolte.grid(column=1, row=0, padx=5, pady=5)
 
         # Prénom du dépositaire
         prenom_depositaire : ctk.CTkEntry = ctk.CTkEntry(self._canva,
