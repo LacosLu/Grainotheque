@@ -19,14 +19,14 @@ class Accueil(Base):
     def _initialiser_champs(self) -> None:
         """Initialise les champs de la page"""
         # Entrée pour la famille
-        famille = ctk.CTkEntry(self._canva,
-                               placeholder_text='Famille',
-                               width=self._largeur_items,
-                               font=self._font,
-                               height=self._hauteur_items)
-        famille.pack(padx=50, pady=5)
-        famille.bind("<1>", lambda event: Base.ouvrir_clavier(event, famille))
-        self._champs_entrees['famille'] = famille
+        self._famille = ctk.CTkComboBox(self._canva,
+                                  width=self._largeur_items,
+                                  font=self._font,
+                                  dropdown_font=self._font,
+                                  height=self._hauteur_items,
+                                  values=["Fruits", "Légumes", "Plantes aromatiques"])
+        self._famille.pack(padx=50, pady=5)
+        self._famille.set("Légumes")
 
         # Entrée pour l'espèce
         espece = ctk.CTkEntry(self._canva,
@@ -71,6 +71,17 @@ class Accueil(Base):
                              height=self._hauteur_items)
         scan.pack(padx=50, pady=5)
         self._bouttons["scan"] = scan
+
+        # Boutton de fermeture de l'accueil
+        fermer : ctk.CTkButton = ctk.CTkButton(self._canva,
+                                               text="Fermer",
+                                               fg_color="red",
+                                               hover_color="darkred",
+                                               width=self._largeur_items,
+                                               height=self._hauteur_items,
+                                               font=self._font)
+        fermer.pack(padx=50, pady=5)
+        self._bouttons["fermer"] = fermer
 
 # ----- PROGRAMME -----
 if __name__ == "__main__":
