@@ -5,6 +5,7 @@ import customtkinter as ctk
 # ----- CLASSES -----
 class Clavier:
     __buttons = [
+        ["/!\\ Majuscules automatiques /!\\"],
         ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'],
         ['a', 'z', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
         ['q', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm'],
@@ -27,12 +28,21 @@ class Clavier:
 
         self.__placement_bouttons()
 
+        self.__root.bind("<FocusOut>", self.__handle_unfocus)
+
     def __placement_bouttons(self) -> None:
         """Placement des bouttons du clavier
         """
         for row, keys in enumerate(Clavier.__buttons):
             for col, key in enumerate(keys):
-                if key == 'Space':
+                if key == "/!\\ Majuscules automatiques /!\\":
+                    button = ctk.CTkLabel(self.__root,
+                                           text=key,
+                                           width=Clavier.__largeur_bouttons,
+                                           height=Clavier.__hauteur_bouttons,
+                                           font=Clavier.__font)
+                    button.grid(row=row + 1, column=col, columnspan=10, padx=5, pady=5)
+                elif key == 'Space':
                     button = ctk.CTkButton(self.__root,
                                            text=key,
                                            width=Clavier.__largeur_bouttons*2,
@@ -88,6 +98,11 @@ class Clavier:
         """Action à réaliser si l'utilisateur à terminer
         """
         self.__root.destroy()
+
+    def __handle_unfocus(self, event):
+        """Fonction qui va être appelé dans un bind
+        """
+        self.__terminer()
 
     def run(self) -> None:
         """Lancement de la fenêtre

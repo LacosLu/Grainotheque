@@ -24,7 +24,7 @@ class Accueil(Base):
                                   font=self._font,
                                   dropdown_font=self._font,
                                   height=self._hauteur_items,
-                                  values=["Fruits", "Légumes", "Plantes Aromatisées"])
+                                  values=["Fruits", "Légumes", "Plantes aromatiques"])
         self._famille.pack(padx=50, pady=5)
         self._famille.set("Légumes")
 
